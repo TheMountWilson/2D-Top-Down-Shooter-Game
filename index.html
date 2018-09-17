@@ -22,9 +22,14 @@ window.onload = function() {
     loadMap();
     var framesPerSecond = 60;
     setInterval(function() {
+        calculateMouseDirection();
         moveEverything();
         drawEverything();
+        
     }, 1000/framesPerSecond);
 }
+var deadscreen = false;
+var playerHealth = 100;
+
 </script>
 </html>

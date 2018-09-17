@@ -4,28 +4,38 @@ let EnemyArray = [];
 function loadMap(){
     EnemyArray.push(new Enemy(612,200,2,2,100,100,3));
     EnemyArray.push(new Enemy(46,100,2,2,100,120,4));
+    EnemyArray.push(new Enemy(123,254,2,2,100,120,4));
+    EnemyArray.push(new Enemy(235,25,2,2,100,120,4));
 }
 
 function drawEverything() {
+    if (deadscreen == false){
     colorRect(0,0,canvas.width,canvas.height,"#d3fff6");
     colorRect(rectPosX,rectPosY,10,10,"#000000");
     if (keyLMouse){
-        //colorCircle(mouseX,mouseY,5,"#ffffff");
-        //colorLine(rectPosX+5,rectPosY+5,mouseX,mouseY,"#ffffff",3);
         if (Reloading == false){
-            bulletArray.push(new Bullet(rectPosX,rectPosY,(a/c)*30,(b/c)*30));
+            bulletArray.push(new Bullet(rectPosX,rectPosY,(a/c)*20,(b/c)*20,"#000000","Player"));
             Reloading = true;
         }
     }
     if (Reloading) Reload();
+
+    //player's health indicator
+    colorRect(rectPosX-5,rectPosY-8,20,4,"#5c6fb2");
+    colorRect(rectPosX-5,rectPosY-8,20*(playerHealth/100),4,"#a30101");
+    colorText(playerHealth,rectPosX,rectPosY-10,"#000000");
+
+
     drawScope(mouseX,mouseY,"#000000");
     animateBullets();
     animateEnemies();
+
 
     // DEBUG TEXT
     colorText (ReloadFramesSkipped,10,10,"#000000");
     colorText (bulletArray.length,10,20,"#000000");
     colorText (EnemyArray.length,10,30,"#000000");
+    }
 }
 
 function drawScope(X,Y,color){
@@ -41,20 +51,30 @@ function animateEnemies(){
     for (let i = 0; i < EnemyArray.length; i++){
         EnemyArray[i].update();
         if(EnemyArray[i].status == false)EnemyArray.splice(i,1);
-      }
+    }
 }
 function animateBullets(){
     for (let i = 0; i < bulletArray.length; i++){
       bulletArray[i].update();
-      if(bulletArray[i].status == false)bulletArray.splice(i,1);
-
       for (let j = 0; j < EnemyArray.length; j++){
-        if  (((bulletArray[i].x >= EnemyArray[j].x-2)&&(bulletArray[i].x <= EnemyArray[j].x+12))&&
-            ((bulletArray[i].y >= EnemyArray[j].y-2)&&(bulletArray[i].y <= EnemyArray[j].y+12))){
+        //current frame collision check
+        if  (((bulletArray[i].x >= EnemyArray[j].x-2)&&(bulletArray[i].x <= EnemyArray[j].x+12))&&((bulletArray[i].y >= EnemyArray[j].y-2)&&(bulletArray[i].y <= EnemyArray[j].y+12))){
+            if(bulletArray[i].owner == "Player"){
                 EnemyArray[j].health -=5;
                 bulletArray[i].status = false;
+            }
+        }
+        if  (((bulletArray[i].x >= rectPosX-2)&&(bulletArray[i].x <= rectPosX+12))&&((bulletArray[i].y >= rectPosY-2)&&(bulletArray[i].y <= rectPosY+12))){
+            if(bulletArray[i].owner == "Enemy"){
+                playerHealth -=1;
+                bulletArray[i].status = false;
+            }
+        }
+        if(EnemyArray[j].health <=0){
+            EnemyArray[j].status = false;
         }
       }
+      if(bulletArray[i].status == false)bulletArray.splice(i,1);
     }
 }
 
