@@ -10,6 +10,7 @@
 <script src="Classes.js"></script>
 <script src="Player.js"></script>
 <script src="Map.js"></script>
+<script src="Main.js"></script>
 </head>
 <body><canvas id="gameCanvas" width="800" height="600"></canvas></body>
 
@@ -25,14 +26,7 @@ window.onload = function() {
     initInput();
     loadMap();
     var framesPerSecond = 60;
-    setInterval(function() {
-
-        calculateMouseDirection();
-        moveEverything();
-        drawEverything();
-        checkHealth ();
-        
-    }, 1000/framesPerSecond);
+    setInterval(Main, 1000/framesPerSecond);
 }
 </script>
 </html>

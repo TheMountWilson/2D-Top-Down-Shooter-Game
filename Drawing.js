@@ -1,9 +1,8 @@
-
-
 function drawEverything() {
     if (deadscreen == false){
     colorRect(0,0,canvas.width,canvas.height,"#d3fff6");
     colorRect(rectPosX,rectPosY,10,10,"#000000");
+
     if (keyLMouse){
         if (Reloading == false){
             bulletArray.push(new Bullet(rectPosX,rectPosY,(a/c)*20,(b/c)*20,"#000000","Player"));
@@ -14,25 +13,31 @@ function drawEverything() {
 
     drawPlayerHealth();
     drawScope(mouseX,mouseY,"#000000");
+    
     animateBullets();
     animateEnemies();
+    animateMedkits();
 
 
-    // DEBUG TEXT
-    colorText (ReloadFramesSkipped,10,10,"#000000","10px");
-    colorText (bulletArray.length,10,20,"#000000","10px");
-    colorText (EnemyArray.length,10,30,"#000000","10px");
+    drawDebugText();
+    
     }
     else if (deadscreen){
         drawDeadScreen();
     }
 }
+
 function drawDeadScreen(){
     colorText("You Died",canvas.width/2,canvas.height/2,"#000000","30px Arial","center");
     colorText("Press Ctrl+R to reset",canvas.width/2,(canvas.height/2)+35,"#000000","30px Arial","center");
 }
+function drawDebugText(){
+    colorText (ReloadFramesSkipped,10,10,"#000000","10px");
+    colorText (bulletArray.length,10,20,"#000000","10px");
+    colorText (EnemyArray.length,10,30,"#000000","10px");
+}
 
-// COMMON DRAWING TOOLS
+// BASIC DRAWING ELEMENTS
 function colorRect(topLeftX,topLeftY, boxWidth, boxHeight, fillColor){
     canvasContext.fillStyle = fillColor;
     canvasContext.fillRect (topLeftX,topLeftY, boxWidth,boxHeight);

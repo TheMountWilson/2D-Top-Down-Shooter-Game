@@ -7,6 +7,7 @@ var Reloading = false;
 var deadscreen = false;
 var playerHealth = 100;
 var deathnextframe = false;
+var ReloadPeriod = 5;
 
 function Reload () {
     if (ReloadFramesSkipped==0){
@@ -15,7 +16,7 @@ function Reload () {
     else if(ReloadFramesSkipped>0 && ReloadFramesSkipped< 5){
         ReloadFramesSkipped++;
     }
-    else if (ReloadFramesSkipped == 5){
+    else if (ReloadFramesSkipped == ReloadPeriod){
         Reloading = false;
         ReloadFramesSkipped = 0;
     }

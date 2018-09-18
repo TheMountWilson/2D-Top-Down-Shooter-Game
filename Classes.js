@@ -1,12 +1,29 @@
+function Medkit (x,y,size){
+    this.x = x;
+    this.y = y;
+    this.size = size;
+    this.status = true;
+    this.pickedUp = function(){
+        playerHealth+=this.size;
+        this.status = false;
+    }
+    this.draw = function (){
+        colorRect(this.x,this.y,5,5,"#40b24e");
+    }
+    this.update = function (){
+        this.draw();
+    }
+}
+
 function Bullet (x,y,dx,dy,color,owner){
     this.x = x;
     this.y = y;
     this.dx = dx;
     this.dy = dy;
+    this.health = 1;
+    this.status = true;
     this.color = color;
     this.radius = 3;
-    this.status = true;
-    this.health = 1;
     this.owner = owner;
 
     this.draw = function(){
@@ -64,7 +81,6 @@ function Enemy (x,y,dx,dy,health,maxhealth,dmg){
 
 
     this.draw = function (){
-        
         colorRect(this.x,this.y,10,10,"#ff0000");
         colorRect(this.x-5,this.y-8,20,4,"#5c6fb2");
         colorRect(this.x-5,this.y-8,20*(this.health/this.maxhealth),4,"#a30101");
@@ -73,7 +89,6 @@ function Enemy (x,y,dx,dy,health,maxhealth,dmg){
             this.shoot();
         }
         if (this.Reloading) this.Reload();
-        
     }
     this.update = function (){
         if(this.health <=0){
@@ -87,12 +102,9 @@ function Enemy (x,y,dx,dy,health,maxhealth,dmg){
         this.Reloading = true;
     }
     this.aim = function (){
-
-        
         this.a = rectPosX - this.x;
         this.b = rectPosY - this.y;
         this.c = Math.sqrt((this.a*this.a)+ (this.b*this.b));
-        
     }
 
 }

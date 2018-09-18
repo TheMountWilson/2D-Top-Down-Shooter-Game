@@ -5,6 +5,7 @@ function animateEnemies(){
     }
 }
 function animateBullets(){
+
     for (let i = 0; i < bulletArray.length; i++){
       bulletArray[i].update();
       for (let j = 0; j < EnemyArray.length; j++){
@@ -18,11 +19,21 @@ function animateBullets(){
         // ENEMY'S BULLET HITS PLAYER
         if  (((bulletArray[i].x >= rectPosX-2)&&(bulletArray[i].x <= rectPosX+12))&&((bulletArray[i].y >= rectPosY-2)&&(bulletArray[i].y <= rectPosY+12))){
             if(bulletArray[i].owner == "Enemy"){
-                playerHealth -=5;
+                playerHealth -=1;
                 bulletArray[i].status = false;
             }
         }
       }
       if(bulletArray[i].status == false)bulletArray.splice(i,1);
+    }
+}
+function animateMedkits(){
+    for (let i = 0; i < MedkitArray.length; i++){
+        MedkitArray[i].update();
+
+        if(((MedkitArray[i].x >= rectPosX-5)&&(MedkitArray[i].x <= rectPosX+10))&&((MedkitArray[i].y>=rectPosY-5)&&(MedkitArray[i].y<=rectPosY+10))){
+            MedkitArray[i].pickedUp();
+        }
+        if(MedkitArray[i].status == false)MedkitArray.splice(i,1);
     }
 }
