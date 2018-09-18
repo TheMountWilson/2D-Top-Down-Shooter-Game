@@ -9,6 +9,7 @@
 <script src="Animations.js"></script>
 <script src="Classes.js"></script>
 <script src="Player.js"></script>
+<script src="Map.js"></script>
 </head>
 <body><canvas id="gameCanvas" width="800" height="600"></canvas></body>
 
@@ -20,6 +21,7 @@ window.onload = function() {
     canvas.style.cursor = "none";
     canvas.focus();
     canvasContext = canvas.getContext('2d');
+    
     initInput();
     loadMap();
     var framesPerSecond = 60;
@@ -32,7 +34,5 @@ window.onload = function() {
         
     }, 1000/framesPerSecond);
 }
-
-
 </script>
 </html>

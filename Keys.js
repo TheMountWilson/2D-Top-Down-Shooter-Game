@@ -76,9 +76,3 @@ function updateMousePos (evt){
     mouseX = evt.clientX - rect.left - root.scrollLeft;
     mouseY = evt.clientY - rect.top - root.scrollTop;
 }
-
-function calculateMouseDirection(){
-    a = mouseX - rectPosX;
-    b = mouseY - rectPosY;
-    c = Math.sqrt((a*a)+ (b*b));
-}
