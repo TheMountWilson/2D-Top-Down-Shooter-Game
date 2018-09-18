@@ -31,7 +31,6 @@ function Bullet (x,y,dx,dy,color,owner){
     }
 }
 
-
 function Enemy (x,y,dx,dy,health,maxhealth,dmg){
     this.x = x;
     this.y = y;
