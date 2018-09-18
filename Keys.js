@@ -12,6 +12,7 @@ var keyLMouse = false;
 var keyRMouse = true;
 var mouseX = 0;
 var mouseY = 0;
+
 var a = 0;
 var b = 0;
 var c = 0;

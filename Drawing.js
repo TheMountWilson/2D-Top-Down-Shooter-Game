@@ -1,5 +1,3 @@
-let bulletArray  = [];
-let EnemyArray = [];
 
 function loadMap(){
     EnemyArray.push(new Enemy(612,200,2,2,100,100,3));
@@ -20,10 +18,10 @@ function drawEverything() {
     }
     if (Reloading) Reload();
 
-    //player's health indicator
+    //PLAYER'S HEALTH INDICATOR
     colorRect(rectPosX-5,rectPosY-8,20,4,"#5c6fb2");
     colorRect(rectPosX-5,rectPosY-8,20*(playerHealth/100),4,"#a30101");
-    colorText(playerHealth,rectPosX,rectPosY-10,"#000000");
+    colorText(playerHealth,rectPosX,rectPosY-10,"#000000","15px arial");
 
 
     drawScope(mouseX,mouseY,"#000000");
@@ -32,10 +30,17 @@ function drawEverything() {
 
 
     // DEBUG TEXT
-    colorText (ReloadFramesSkipped,10,10,"#000000");
-    colorText (bulletArray.length,10,20,"#000000");
-    colorText (EnemyArray.length,10,30,"#000000");
+    colorText (ReloadFramesSkipped,10,10,"#000000","10px");
+    colorText (bulletArray.length,10,20,"#000000","10px");
+    colorText (EnemyArray.length,10,30,"#000000","10px");
     }
+    else if (deadscreen){
+        drawDeadScreen();
+    }
+}
+function drawDeadScreen(){
+    colorText("You Died",canvas.width/2,canvas.height/2,"#000000","30px Arial","center");
+    colorText("Press Ctrl+R to reset",canvas.width/2,(canvas.height/2)+35,"#000000","30px Arial","center");
 }
 
 function drawScope(X,Y,color){
@@ -47,45 +52,14 @@ function drawScope(X,Y,color){
     colorLine(X,Y+5,X,Y+13,color,1);
 }
 
-function animateEnemies(){
-    for (let i = 0; i < EnemyArray.length; i++){
-        EnemyArray[i].update();
-        if(EnemyArray[i].status == false)EnemyArray.splice(i,1);
-    }
-}
-function animateBullets(){
-    for (let i = 0; i < bulletArray.length; i++){
-      bulletArray[i].update();
-      for (let j = 0; j < EnemyArray.length; j++){
-        //current frame collision check
-        if  (((bulletArray[i].x >= EnemyArray[j].x-2)&&(bulletArray[i].x <= EnemyArray[j].x+12))&&((bulletArray[i].y >= EnemyArray[j].y-2)&&(bulletArray[i].y <= EnemyArray[j].y+12))){
-            if(bulletArray[i].owner == "Player"){
-                EnemyArray[j].health -=5;
-                bulletArray[i].status = false;
-            }
-        }
-        if  (((bulletArray[i].x >= rectPosX-2)&&(bulletArray[i].x <= rectPosX+12))&&((bulletArray[i].y >= rectPosY-2)&&(bulletArray[i].y <= rectPosY+12))){
-            if(bulletArray[i].owner == "Enemy"){
-                playerHealth -=1;
-                bulletArray[i].status = false;
-            }
-        }
-        if(EnemyArray[j].health <=0){
-            EnemyArray[j].status = false;
-        }
-      }
-      if(bulletArray[i].status == false)bulletArray.splice(i,1);
-    }
-}
-
-
-
 function colorRect(topLeftX,topLeftY, boxWidth, boxHeight, fillColor){
     canvasContext.fillStyle = fillColor;
     canvasContext.fillRect (topLeftX,topLeftY, boxWidth,boxHeight);
 }
-function colorText(showWords, textX, textY, fillColor){
+function colorText(showWords, textX, textY, fillColor,font,align = "start"){
     canvasContext.fillStyle = fillColor;
+    canvasContext.font = font;
+    canvasContext.textAlign=align;
     canvasContext.fillText(showWords,textX,textY);
 }
 function colorCircle(centerX,centerY,radius,fillColor){

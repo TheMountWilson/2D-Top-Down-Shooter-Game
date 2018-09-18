@@ -7,6 +7,8 @@
 <script src="Movement.js"></script>
 <script src="Drawing.js"></script>
 <script src="Animations.js"></script>
+<script src="Classes.js"></script>
+<script src="Player.js"></script>
 </head>
 <body><canvas id="gameCanvas" width="800" height="600"></canvas></body>
 
@@ -22,14 +24,15 @@ window.onload = function() {
     loadMap();
     var framesPerSecond = 60;
     setInterval(function() {
+
         calculateMouseDirection();
         moveEverything();
         drawEverything();
+        checkHealth ();
         
     }, 1000/framesPerSecond);
 }
-var deadscreen = false;
-var playerHealth = 100;
+
 
 </script>
 </html>
