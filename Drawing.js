@@ -1,10 +1,4 @@
 
-function loadMap(){
-    EnemyArray.push(new Enemy(612,200,2,2,100,100,3));
-    EnemyArray.push(new Enemy(46,100,2,2,100,120,4));
-    EnemyArray.push(new Enemy(123,254,2,2,100,120,4));
-    EnemyArray.push(new Enemy(235,25,2,2,100,120,4));
-}
 
 function drawEverything() {
     if (deadscreen == false){
@@ -43,15 +37,7 @@ function drawDeadScreen(){
     colorText("Press Ctrl+R to reset",canvas.width/2,(canvas.height/2)+35,"#000000","30px Arial","center");
 }
 
-function drawScope(X,Y,color){
-    canvasContext.fillStyle = color;
-    colorRect(X-1,Y-1,2,2);
-    colorLine(X-5,Y,X-13,Y,color,1);
-    colorLine(X+5,Y,X+13,Y,color,1);
-    colorLine(X,Y-5,X,Y-13,color,1);
-    colorLine(X,Y+5,X,Y+13,color,1);
-}
-
+// COMMON DRAWING TOOLS
 function colorRect(topLeftX,topLeftY, boxWidth, boxHeight, fillColor){
     canvasContext.fillStyle = fillColor;
     canvasContext.fillRect (topLeftX,topLeftY, boxWidth,boxHeight);

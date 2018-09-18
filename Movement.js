@@ -1,8 +1,3 @@
-var rectPosX = 100;
-var rectPosY = 100;
-var rectSpeedX = 5;
-var rectSpeedY = 5;
-
 function  moveEverything(){
     switch (keyCombination){
         case "1000":

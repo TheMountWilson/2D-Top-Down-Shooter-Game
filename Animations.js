@@ -1,6 +1,3 @@
-let bulletArray  = [];
-let EnemyArray = [];
-
 function animateEnemies(){
     for (let i = 0; i < EnemyArray.length; i++){
         EnemyArray[i].update();

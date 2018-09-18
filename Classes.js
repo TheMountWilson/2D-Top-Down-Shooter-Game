@@ -48,7 +48,7 @@ function Enemy (x,y,dx,dy,health,maxhealth,dmg){
 
     this.Reloading = false;
     this.ReloadFramesSkipped = 0;
-    this.ReloadPeriod = 100;
+    this.ReloadPeriod = 60; 
 
     this.Reload = function () {
         if (this.ReloadFramesSkipped==0){
