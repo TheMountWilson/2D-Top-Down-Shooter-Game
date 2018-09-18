@@ -12,12 +12,7 @@ function drawEverything() {
     }
     if (Reloading) Reload();
 
-    //PLAYER'S HEALTH INDICATOR
-    colorRect(rectPosX-5,rectPosY-8,20,4,"#5c6fb2");
-    colorRect(rectPosX-5,rectPosY-8,20*(playerHealth/100),4,"#a30101");
-    colorText(playerHealth,rectPosX,rectPosY-10,"#000000","15px arial");
-
-
+    drawPlayerHealth();
     drawScope(mouseX,mouseY,"#000000");
     animateBullets();
     animateEnemies();
