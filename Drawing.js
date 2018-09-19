@@ -2,7 +2,7 @@ function drawEverything() {
     if (deadscreen == false){
     colorRect(0,0,canvas.width,canvas.height,"#d3fff6");
     colorRect(rectPosX,rectPosY,10,10,"#000000");
-
+    drawMap();
     if (keyLMouse){
         if (Reloading == false){
             bulletArray.push(new Bullet(rectPosX,rectPosY,(a/c)*20,(b/c)*20,"#000000","Player"));
