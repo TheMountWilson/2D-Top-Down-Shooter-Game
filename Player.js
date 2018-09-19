@@ -9,6 +9,11 @@ var playerHealth = 100;
 var deathnextframe = false;
 var ReloadPeriod = 5;
 
+var rectNORTHIsNotBlocked = true;
+var rectEASTIsNotBlocked = true;
+var rectSOUTHIsNotBlocked = true;
+var rectWESTIsNotBlocked = true;
+
 function Reload () {
     if (ReloadFramesSkipped==0){
         ReloadFramesSkipped++;
@@ -47,73 +52,144 @@ function drawPlayerHealth(){
     colorText(playerHealth,rectPosX,rectPosY-10,"#000000","15px arial");
 }
 function movePlayer(){
+    rectLocX = Math.floor(rectPosX/10);
+    rectLocY = Math.floor(rectPosY/10);
+    DetectRectangleCollisions();
+
     switch (keyCombination){
         case "1000":
         case "1001":
-            if(rectPosX>0){rectPosX-=rectSpeedX;}
-        break;
+            if(rectPosX>0){
+                if(rectWESTIsNotBlocked){
+                    rectPosX-=rectSpeedX;
+                }
+                else if(rectWESTIsNotBlocked == false){
+                    rectPosX = (rectLocX-1)*10+10;
+                }
+            }
+            break;
 
         case "1100":
         case "1101":
             if (rectPosX>0 && rectPosY>0){
+
+                if(rectWESTIsNotBlocked && rectNORTHIsNotBlocked){
                     rectPosX-=rectSpeedX*0.7;
                     rectPosY-=rectSpeedY*0.7;
+                }
+                else if (rectWESTIsNotBlocked && rectNORTHIsNotBlocked == false){
+                    rectPosX-=rectSpeedX;
+                    rectPosY = (rectLocY-1)*10+10;
+                }   
+                else if (rectNORTHIsNotBlocked && rectWESTIsNotBlocked == false){
+                    rectPosY-=rectSpeedY;
+                    rectPosX = (rectLocX-1)*10+10;  
+                }
+
             }else if(rectPosX>0){
                 rectPosX-=rectSpeedX;
             }else if (rectPosY>0){
                 rectPosY-=rectSpeedY;
             }
-        break;
+            break;
 
         case "0100":
             if(rectPosY>0){
-                rectPosY-=rectSpeedY;
+                if(rectNORTHIsNotBlocked){
+                    rectPosY-=rectSpeedY;
+                }
+                else if (rectNORTHIsNotBlocked == false){
+                    rectPosY = (rectLocY-1)*10+10;
+                }
             }
-        break;
+            break;
+
         case "0101":
             if (rectPosX<(canvas.width-10) && rectPosY>0){
-                rectPosX+=rectSpeedX*0.7;
-                rectPosY-=rectSpeedY*0.7;
+                if(rectEASTIsNotBlocked && rectNORTHIsNotBlocked){
+                    rectPosX+=rectSpeedX*0.7;
+                    rectPosY-=rectSpeedY*0.7;
+                }
+                else if(rectEASTIsNotBlocked && rectNORTHIsNotBlocked == false){
+                    rectPosX+=rectSpeedX;
+                    rectPosY = (rectLocY-1)*10+10;
+                }
+                else if(rectNORTHIsNotBlocked && rectEASTIsNotBlocked == false){
+                    rectPosY-=rectSpeedY*0.7;
+                    rectPosX = (rectLocX-1)*10+10;
+                }
             }else if (rectPosX<(canvas.width-10)){
                 rectPosX+=rectSpeedX;
             }else if (rectPosY>0){
                 rectPosY-=rectSpeedY;
             }
-        break;    
+            break;
 
         case "0001":
             if(rectPosX<(canvas.width-10)){
-                rectPosX+=rectSpeedX;
+                if(rectEASTIsNotBlocked){
+                    rectPosX+=rectSpeedX;
+                }else if(rectEASTIsNotBlocked == false){
+                    rectPosX = (rectLocX+1)*10-10;
+                }
             }
-        break;
-
+            break;
+        
         case "0011":
             if (rectPosX<(canvas.width-10) && rectPosY<(canvas.height-10)){
-                rectPosX+=rectSpeedX*0.7;
+                if(rectEASTIsNotBlocked && rectSOUTHIsNotBlocked) {
+                    rectPosX+=rectSpeedX*0.7;
                     rectPosY+=rectSpeedY*0.7;
+                }
+                else if (rectEASTIsNotBlocked && rectSOUTHIsNotBlocked == false){
+                    rectPosX+=rectSpeedX;
+                    rectPosY = (rectLocY-1)*10+10;
+                }
+                else if (rectSOUTHIsNotBlocked && rectEASTIsNotBlocked == false){
+                    rectPosY+=rectSpeedY;
+                    rectPosX = (rectLocX-1)*10+10;
+                }
+
             }else if (rectPosY<(canvas.height-10)){
                 rectPosY+=rectSpeedY;
             }else if (rectPosX<(canvas.width-10)){
                 rectPosX+=rectSpeedX;
             }
-        break;
+            break;
 
         case "0010":
             if(rectPosY<(canvas.height-10)){
-                rectPosY+=rectSpeedY;
+                if(rectSOUTHIsNotBlocked){
+                    rectPosY+=rectSpeedY;
+                }
+                else if (rectSOUTHIsNotBlocked == false){
+                    rectPosY = (rectLocY+1)*10-10;
+                }
             }
-        break;
-
+            break;
+        
         case "1010":
         case "1011":
             if (rectPosX>0 && rectPosY<(canvas.height-10)){
-                rectPosX-=rectSpeedX*0.7;
-                rectPosY+=rectSpeedY*0.7;
+                if (rectWESTIsNotBlocked && rectSOUTHIsNotBlocked){
+                    rectPosX-=rectSpeedX*0.7;
+                    rectPosY+=rectSpeedY*0.7;
+                }
+                else if (rectWESTIsNotBlocked && rectSOUTHIsNotBlocked  == false){
+                    rectPosX-=rectSpeedX;
+                    rectPosY = (rectLocY-1)*10+10;
+                }
+                else if (rectSOUTHIsNotBlocked && rectWESTIsNotBlocked == false){
+                    rectPosY+=rectSpeedY;
+                    rectPosX = (rectLocX-1)*10+10;
+                }
+
             }else if(rectPosX>0){
                 rectPosX-=rectSpeedX;
             }else if(rectPosY<(canvas.height-10)){
                 rectPosY+=rectSpeedY;
             }
-        break;
+            break;
     }
+    
 }
