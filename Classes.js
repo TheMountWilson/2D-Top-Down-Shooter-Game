@@ -42,7 +42,7 @@ function Bullet (x,y,status,dx,dy,color,owner){
     this.dy = dy;
     this.health = 1;
     this.color = color;
-    this.radius = 3;
+    this.radius = 2;
     this.owner = owner;
 
     this.draw = function(){

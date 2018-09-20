@@ -84,8 +84,28 @@ function drawMap(){
 }
 function DetectBulletCollision (bulletX,bulletY){
     
-    var tile = MapTiles.find(MapTile => {
+    var tile;
+    
+    tile = MapTiles.find(MapTile => {
         return (MapTile.x < bulletX-2 && MapTile.x+10 >= bulletX-2)&&(MapTile.y < bulletY-2 && MapTile.y+10 >= bulletY-2);
+    })
+    if (tile != undefined){
+        if(tile.level == 1) return true;
+    }
+    tile = MapTiles.find(MapTile => {
+        return (MapTile.x <= bulletX+2 && MapTile.x+10 > bulletX+2)&&(MapTile.y < bulletY-2 && MapTile.y+10 >= bulletY-2);
+    })
+    if (tile != undefined){
+        if(tile.level == 1) return true;
+    }
+    tile = MapTiles.find(MapTile => {
+        return (MapTile.x <= bulletX+2 && MapTile.x+10 > bulletX+2)&&(MapTile.y <= bulletY+2 && MapTile.y+10 > bulletY+2);
+    })
+    if (tile != undefined){
+        if(tile.level == 1) return true;
+    }
+    tile = MapTiles.find(MapTile => {
+        return (MapTile.x < bulletX-2 && MapTile.x+10 >= bulletX-2)&&(MapTile.y <= bulletY+2 && MapTile.y+10 > bulletY+2);
     })
     if (tile != undefined){
         if(tile.level == 1) return true;
