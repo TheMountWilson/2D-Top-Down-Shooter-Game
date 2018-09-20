@@ -54,7 +54,7 @@ function drawPlayerHealth(){
 function movePlayer(){
     rectLocX = Math.floor(rectPosX/10);
     rectLocY = Math.floor(rectPosY/10);
-    DetectRectangleCollisions();
+    //DetectRectangleCollisions();
 
     switch (keyCombination){
         case "1000":

@@ -1,8 +1,28 @@
-function Medkit (x,y,size){
+function MapTile (x,y,level,passable,texture){
     this.x = x;
     this.y = y;
+    this.level = level;
+    this.passable = passable;
+    this.texture = texture;
+    this.draw = function (){
+        colorRect(this.x,this.y,10,10,this.texture);
+    }
+    this.setMapTile_Level_Texture = function (level,texture){
+        this.level = level;
+        this.texture = texture;
+    }
+}
+
+function Element (x,y,status){
+    this.x = x;
+    this.y = y;
+    this.status = status;
+}
+
+function Medkit (x,y,status,size){
+    Element.call(this,x,y,status);
+    
     this.size = size;
-    this.status = true;
     this.pickedUp = function(){
         playerHealth+=this.size;
         this.status = false;
@@ -15,13 +35,12 @@ function Medkit (x,y,size){
     }
 }
 
-function Bullet (x,y,dx,dy,color,owner){
-    this.x = x;
-    this.y = y;
+function Bullet (x,y,status,dx,dy,color,owner){
+    Element.call(this,x,y,status);
+
     this.dx = dx;
     this.dy = dy;
     this.health = 1;
-    this.status = true;
     this.color = color;
     this.radius = 3;
     this.owner = owner;
@@ -39,6 +58,7 @@ function Bullet (x,y,dx,dy,color,owner){
               this.dy = -this.dy
               this.health -=1
           }
+        if(DetectBulletCollision(this.x,this.y))this.health-=1;
         if (this.health <= 0) this.status = false;
         if (this.status){
             this.x += this.dx
@@ -48,15 +68,15 @@ function Bullet (x,y,dx,dy,color,owner){
     }
 }
 
-function Enemy (x,y,dx,dy,health,maxhealth,dmg){
-    this.x = x;
-    this.y = y;
+function Enemy (x,y,status,dx,dy,health,maxhealth,dmg){
+    Element.call(this,x,y,status);
+
     this.dx = dx;
     this.dy = dy;
     this.health = health;
     this.maxhealth = maxhealth;
     this.dmg = dmg;
-    this.status = true;
+    
 
     this.a = 0;
     this.b = 0;
@@ -98,7 +118,7 @@ function Enemy (x,y,dx,dy,health,maxhealth,dmg){
     }
     this.shoot = function (){
         this.aim();
-        bulletArray.push(new Bullet(this.x,this.y,(this.a/this.c)*20,(this.b/this.c)*20,"#ff0000","Enemy"));
+        bulletArray.push(new Bullet(this.x,this.y,true,(this.a/this.c)*20,(this.b/this.c)*20,"#ff0000","Enemy"));
         this.Reloading = true;
     }
     this.aim = function (){
