@@ -58,7 +58,7 @@ function Bullet (x,y,status,dx,dy,color,owner){
               this.dy = -this.dy
               this.health -=1
           }
-        if(DetectBulletCollision(this.x,this.y))this.health-=1;
+        if(DetectBulletCollision(this.x,this.y,this.dx,this.dy))this.health-=1;
         if (this.health <= 0) this.status = false;
         if (this.status){
             this.x += this.dx

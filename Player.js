@@ -26,18 +26,15 @@ function Reload () {
         ReloadFramesSkipped = 0;
     }
 }
-
 function checkHealth(){
     if(deathnextframe)deadscreen = true;
     if(playerHealth<=0)deathnextframe = true;
 }
-
 function calculateMouseDirection(){
     a = mouseX - rectPosX;
     b = mouseY - rectPosY;
     c = Math.sqrt((a*a)+ (b*b));
 }
-
 function drawScope(X,Y,color){
     canvasContext.fillStyle = color;
     colorRect(X-1,Y-1,2,2);
@@ -191,5 +188,4 @@ function movePlayer(){
             }
             break;
     }
-    
 }
