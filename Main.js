@@ -1,6 +1,6 @@
 function Main(){
     calculateMouseDirection();
-    moveEverything();
+    movePlayer();
     drawEverything();
     checkHealth ();
 }
