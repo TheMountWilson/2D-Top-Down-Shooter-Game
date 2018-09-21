@@ -4,8 +4,6 @@ let bulletArray  = [];
 let EnemyArray = [];
 let MedkitArray = [];
 
-
-
 var rectLocX = 0;
 var rectLocY = 0;
 
@@ -82,10 +80,46 @@ function drawMap(){
         MapTiles[i].draw();
     }
 }
-function DetectBulletCollision (bulletX,bulletY){
+function DetectBulletCollision (bulletX,bulletY,bulletDX,bulletDY){
     
     var tile;
+
+    if ((bulletDX!=0)&&(bulletDY!=0)){
+        if ((bulletDX<0)&&(bulletDY<0)){
+
+        }
+        else if ((bulletDX>0)&&(bulletDY<0)){
     
+        }
+        else if ((bulletDX<0)&&(bulletDY>0)){
+    
+        }
+        else if ((bulletDX>0)&&(bulletDY>0)){
+    
+        }
+    }
+    else if ((bulletDX==0)&&(bulletDY!=0)){
+        if (bulletDY<0){
+
+        }
+        else if (bulletDY>0){
+
+        }
+    }
+    else if ((bulletDX!=0)&&(bulletDY==0)){
+        if (bulletDX<0){
+
+        }
+        else if (bulletDX>0){
+
+        }
+    }
+    else if ((bulletDX==0)&&(bulletDY==0)){
+
+    }
+    
+
+
     tile = MapTiles.find(MapTile => {
         return (MapTile.x < bulletX-2 && MapTile.x+10 >= bulletX-2)&&(MapTile.y < bulletY-2 && MapTile.y+10 >= bulletY-2);
     })
