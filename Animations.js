@@ -1,10 +1,10 @@
-function animateEnemies(){
+function updateEnemies(){
     for (let i = 0; i < EnemyArray.length; i++){
         EnemyArray[i].update();
         if(EnemyArray[i].status == false)EnemyArray.splice(i,1);
     }
 }
-function animateBullets(){
+function updateBullets(){
 
     for (let i = 0; i < bulletArray.length; i++){
       bulletArray[i].update();
@@ -29,10 +29,9 @@ function animateBullets(){
       if(bulletArray[i].status == false)bulletArray.splice(i,1);
     }
 }
-function animateMedkits(){
+function updateMedkits(){
     for (let i = 0; i < MedkitArray.length; i++){
         MedkitArray[i].update();
-
         if(((MedkitArray[i].x >= rectPosX-5)&&(MedkitArray[i].x <= rectPosX+10))&&
             ((MedkitArray[i].y>=rectPosY-5)&&(MedkitArray[i].y<=rectPosY+10))){
             MedkitArray[i].pickedUp();

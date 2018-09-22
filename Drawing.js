@@ -2,7 +2,7 @@ function drawEverything() {
     if (deadscreen == false){
     colorRect(0,0,canvas.width,canvas.height,"#d3fff6");
     drawMap();
-    colorRect(rectPosX,rectPosY,10,10,"#000000");
+    colorRect(rectPosX-5,rectPosY-5,10,10,"#000000");
     
     if (keyLMouse){
         if (Reloading == false){
@@ -15,9 +15,9 @@ function drawEverything() {
     drawPlayerHealth();
     drawScope(mouseX,mouseY,"#000000");
     
-    animateBullets();
-    animateEnemies();
-    animateMedkits();
+    updateBullets();
+    updateEnemies();
+    updateMedkits();
 
 
     drawDebugText();
