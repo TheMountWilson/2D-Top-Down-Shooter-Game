@@ -44,9 +44,9 @@ function drawScope(X,Y,color){
     colorLine(X,Y+5,X,Y+13,color,1);
 }
 function drawPlayerHealth(){
-    colorRect(rectPosX-5,rectPosY-8,20,4,"#5c6fb2");
-    colorRect(rectPosX-5,rectPosY-8,20*(playerHealth/100),4,"#a30101");
-    colorText(playerHealth,rectPosX,rectPosY-10,"#000000","15px arial");
+    colorRect(rectPosX-10,rectPosY-15,20,4,"#5c6fb2");
+    colorRect(rectPosX-10,rectPosY-15,20*(playerHealth/100),4,"#a30101");
+    colorText(playerHealth,rectPosX-5,rectPosY-15,"#000000","15px arial");
 }
 function movePlayer(){
     rectLocX = Math.floor(rectPosX/10);
@@ -56,7 +56,7 @@ function movePlayer(){
     switch (keyCombination){
         case "1000":
         case "1001":
-            if(rectPosX>0){
+            if(rectPosX>5){
                 if(rectWESTIsNotBlocked){
                     rectPosX-=rectSpeedX;
                 }
@@ -68,7 +68,7 @@ function movePlayer(){
 
         case "1100":
         case "1101":
-            if (rectPosX>0 && rectPosY>0){
+            if (rectPosX>5 && rectPosY>5){
 
                 if(rectWESTIsNotBlocked && rectNORTHIsNotBlocked){
                     rectPosX-=rectSpeedX*0.7;
@@ -83,15 +83,15 @@ function movePlayer(){
                     rectPosX = (rectLocX-1)*10+10;  
                 }
 
-            }else if(rectPosX>0){
+            }else if(rectPosX>5){
                 rectPosX-=rectSpeedX;
-            }else if (rectPosY>0){
+            }else if (rectPosY>5){
                 rectPosY-=rectSpeedY;
             }
             break;
 
         case "0100":
-            if(rectPosY>0){
+            if(rectPosY>5){
                 if(rectNORTHIsNotBlocked){
                     rectPosY-=rectSpeedY;
                 }
@@ -102,7 +102,7 @@ function movePlayer(){
             break;
 
         case "0101":
-            if (rectPosX<(canvas.width-10) && rectPosY>0){
+            if (rectPosX<(canvas.width-5) && rectPosY>5){
                 if(rectEASTIsNotBlocked && rectNORTHIsNotBlocked){
                     rectPosX+=rectSpeedX*0.7;
                     rectPosY-=rectSpeedY*0.7;
@@ -115,15 +115,15 @@ function movePlayer(){
                     rectPosY-=rectSpeedY*0.7;
                     rectPosX = (rectLocX-1)*10+10;
                 }
-            }else if (rectPosX<(canvas.width-10)){
+            }else if (rectPosX<(canvas.width-5)){
                 rectPosX+=rectSpeedX;
-            }else if (rectPosY>0){
+            }else if (rectPosY>5){
                 rectPosY-=rectSpeedY;
             }
             break;
 
         case "0001":
-            if(rectPosX<(canvas.width-10)){
+            if(rectPosX<(canvas.width-5)){
                 if(rectEASTIsNotBlocked){
                     rectPosX+=rectSpeedX;
                 }else if(rectEASTIsNotBlocked == false){
@@ -133,7 +133,7 @@ function movePlayer(){
             break;
         
         case "0011":
-            if (rectPosX<(canvas.width-10) && rectPosY<(canvas.height-10)){
+            if (rectPosX<(canvas.width-5) && rectPosY<(canvas.height-5)){
                 if(rectEASTIsNotBlocked && rectSOUTHIsNotBlocked) {
                     rectPosX+=rectSpeedX*0.7;
                     rectPosY+=rectSpeedY*0.7;
@@ -147,15 +147,15 @@ function movePlayer(){
                     rectPosX = (rectLocX-1)*10+10;
                 }
 
-            }else if (rectPosY<(canvas.height-10)){
+            }else if (rectPosY<(canvas.height-5)){
                 rectPosY+=rectSpeedY;
-            }else if (rectPosX<(canvas.width-10)){
+            }else if (rectPosX<(canvas.width-5)){
                 rectPosX+=rectSpeedX;
             }
             break;
 
         case "0010":
-            if(rectPosY<(canvas.height-10)){
+            if(rectPosY<(canvas.height-5)){
                 if(rectSOUTHIsNotBlocked){
                     rectPosY+=rectSpeedY;
                 }
@@ -167,7 +167,7 @@ function movePlayer(){
         
         case "1010":
         case "1011":
-            if (rectPosX>0 && rectPosY<(canvas.height-10)){
+            if (rectPosX>5 && rectPosY<(canvas.height-5)){
                 if (rectWESTIsNotBlocked && rectSOUTHIsNotBlocked){
                     rectPosX-=rectSpeedX*0.7;
                     rectPosY+=rectSpeedY*0.7;
@@ -181,9 +181,9 @@ function movePlayer(){
                     rectPosX = (rectLocX-1)*10+10;
                 }
 
-            }else if(rectPosX>0){
+            }else if(rectPosX>5){
                 rectPosX-=rectSpeedX;
-            }else if(rectPosY<(canvas.height-10)){
+            }else if(rectPosY<(canvas.height-5)){
                 rectPosY+=rectSpeedY;
             }
             break;
