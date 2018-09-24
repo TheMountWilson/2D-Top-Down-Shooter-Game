@@ -75,11 +75,7 @@ function CreateMapTiles (){
     MapTiles.push(new MapTile (290,290,0,true,"#2c93a5"));
     */
 }
-function drawMap(){
-    for (let i = 0; i < MapTiles.length; i++){
-        MapTiles[i].draw();
-    }
-}
+
 
 function loadMap(){
     CreateMapTiles();

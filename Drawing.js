@@ -38,6 +38,11 @@ function drawDebugText(){
     colorText (EnemyArray.length,10,30,"#000000","10px");
 }
 
+function drawMap(){
+    for (let i = 0; i < MapTiles.length; i++){
+        MapTiles[i].draw();
+    }
+}
 // BASIC DRAWING ELEMENTS
 function colorRect(topLeftX,topLeftY, boxWidth, boxHeight, fillColor){
     canvasContext.fillStyle = fillColor;
