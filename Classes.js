@@ -1,18 +1,3 @@
-function MapTile (x,y,level,passable,texture){
-    this.x = x;
-    this.y = y;
-    this.level = level;
-    this.passable = passable;
-    this.texture = texture;
-    this.draw = function (){
-        colorRect(this.x,this.y,10,10,this.texture);
-    }
-    this.setMapTile_Level_Texture = function (level,texture){
-        this.level = level;
-        this.texture = texture;
-    }
-}
-
 function Element (x,y,status){
     this.x = x;
     this.y = y;
@@ -50,15 +35,16 @@ function Bullet (x,y,status,dx,dy,color,owner){
     }
 
     this.update = function(){
-        if (this.x + this.radius > 800 || this.x - this.radius < 0){
+        if (this.x + this.radius > CanvasWidth || this.x - this.radius < 0){
             this.dx = -this.dx
             this.health -=1
           }
-            if (this.y + this.radius > 600 || this.y - this.radius < 0){
+            if (this.y + this.radius > CanvasHeight || this.y - this.radius < 0){
               this.dy = -this.dy
               this.health -=1
           }
-        if(DetectBulletCollision(this.x,this.y,this.dx,this.dy))this.health-=1;
+        
+        
         if (this.health <= 0) this.status = false;
         if (this.status){
             this.x += this.dx

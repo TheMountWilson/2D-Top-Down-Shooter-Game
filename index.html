@@ -12,13 +12,18 @@
 <script src="Collisions.js"></script>
 <script src="Main.js"></script>
 </head>
-<body><canvas id="gameCanvas" width="800" height="600"></canvas></body>
+<body><canvas id="gameCanvas"></canvas></body>
 
 <script>
 window.onload = function() {
     canvas = document.getElementById('gameCanvas');
+    canvas.width  = CanvasWidth;
+    canvas.height = CanvasHeight;
+    adjustScreen();
+    
     canvas.onwheel = function(event){event.preventDefault();}
     canvas.onmousewheel = function(event){event.preventDefault();}
+
     canvas.style.cursor = "none";
     canvas.focus();
     canvasContext = canvas.getContext('2d');
@@ -27,6 +32,19 @@ window.onload = function() {
     loadMap();
     var framesPerSecond = 60;
     setInterval(Main, 1000/framesPerSecond);
+
+}
+window.onresize = function() {
+    adjustScreen();
+}
+function adjustScreen(){
+
+
+    canvas = document.getElementById('gameCanvas');
+    
+    canvas.style.left = " "+window.innerWidth/2 - canvas.width/2+ "px";
+    canvas.style.top = " "+window.innerHeight/2-canvas.width/2+ " px";
+    canvas.style.position = "absolute";
 }
 </script>
 </html>
