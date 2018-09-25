@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+<meta content="utf-8" http-equiv="encoding">
+</head>
+<body>
+    <canvas id="gameCanvas" width = "2000" height="2000" ></canvas>
+    <button  onclick = "Output();" style = "width: 100px; top: 100px; left: 2100px; position: absolute;">Output</button>
+    <p id="output" style = "position: absolute; left: 2200px; top: 100px;"></p>
+</body>
+<script>
+var MAP = new Array (200*200);
+
+window.onload = function() {
+    canvas = document.getElementById('gameCanvas');
+
+    canvas.style.left = "100px";
+    canvas.style.top = "100px";
+    canvas.style.position = "absolute";
+    
+    canvas.onwheel = function(event){event.preventDefault();}
+    canvas.onmousewheel = function(event){event.preventDefault();}
+    document.addEventListener('mousedown', MouseDownHandler);
+    document.addEventListener('mouseup', MouseUpHandler);
+    document.addEventListener('mousemove', updateMousePos);
+    for (let i = 0;i<MAP.length;i++){
+        MAP[i] = false;
+    }
+    canvas.focus();
+    canvasContext = canvas.getContext('2d');
+    
+
+    var framesPerSecond = 60;
+    setInterval(Main, 1000/framesPerSecond);
+
+}
+function Output(){
+    var OutStr = "[";
+    var counter = 0;
+    for (let i = 0;i<MAP.length;i++){
+        if (counter ==200){
+            OutStr += "\n";
+            counter = 0;
+        }
+        if(MAP[i])OutStr += "1,";
+        else OutStr += "0,";
+        counter++;
+        
+    }
+    OutStr += "];"
+
+    document.getElementById('output').innerHTML = OutStr;
+    
+
+
+}
+function Main (){
+    
+    colorRect(0,0,canvas.width,canvas.height,"#d3fff6");
+    colorLine(0,0,0,canvas.height,"#000000",3);
+    colorLine(0,canvas.height,canvas.width,canvas.height,"#000000",3);
+    colorLine(canvas.width,canvas.height,canvas.width,0,"#000000",3);
+    colorLine(canvas.width,0,0,0,"#000000",3);
+
+    colorText(Math.floor(mouseX) + "," + Math.floor(mouseY),mouseX+20,mouseY+20,"#000000","30px Arial ");
+    drawMap();
+
+}
+
+
+function drawMap(){
+    for (let i = 0;i<200;i++){
+        for (let j = 0;j<200;j++){
+            if (MAP[i*200+j])colorRect(j*10,i*10,10,10,"#4286f4");
+        }
+    }
+}
+
+
+
+/* MOUSE EVENT LISTENERS */
+var keyLMouse = false;
+var keyRMouse = true;
+var mouseX = 0;
+var mouseY = 0;
+
+function MouseDownHandler (evt){
+    if (evt.button == 0) {
+        keyLMouse = true;
+    }
+    else if(evt.button == 2) {
+        keyRMouse = true;
+    }
+}
+
+function MouseUpHandler (evt){
+    if(evt.button == 0){
+        keyLMouse = false;
+    }
+    else if(evt.button == 2){
+        keyRMouse = false;
+    }
+}
+
+function updateMousePos (evt){
+    var rect = canvas.getBoundingClientRect();
+    var root = document.documentElement;
+    mouseX = evt.clientX - rect.left - root.scrollLeft;
+    mouseY = evt.clientY - rect.top - root.scrollTop;
+
+    if (keyLMouse){
+        MAP[(Math.floor(mouseY/10))*200+(Math.floor(mouseX/10))] = true;
+    }
+}
+
+
+/* DRAWING */
+function colorRect(topLeftX,topLeftY, boxWidth, boxHeight, fillColor){
+    canvasContext.fillStyle = fillColor;
+    canvasContext.fillRect (topLeftX,topLeftY, boxWidth,boxHeight);
+}
+function colorText(showWords, textX, textY, fillColor,font,align = "start"){
+    canvasContext.fillStyle = fillColor;
+    canvasContext.font = font;
+    canvasContext.textAlign=align;
+    canvasContext.fillText(showWords,textX,textY);
+}
+function colorLine (startX,startY,endX,endY,strokeColor,strokeWidth){
+    canvasContext.strokeStyle = strokeColor;
+    canvasContext.lineWidth = strokeWidth;
+    canvasContext.beginPath();
+    canvasContext.moveTo(startX,startY);
+    canvasContext.lineTo(endX,endY);
+    canvasContext.stroke();
+}
+
+
+</script>
+
+</html>
+
+

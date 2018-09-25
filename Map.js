@@ -75,7 +75,7 @@ function loadMap(){
 function drawMap(){
     for (let i = 0;i<50;i++){
         for (let j = 0;j<50;j++){
-            if (MAP[i*50+j]==1)colorRect(j*10,i*10,10,10,"#4286f4");
+            if (MAP[i*50+j]==1)colorRect(100+j*10,100+i*10,10,10,"#4286f4");
         }
     }
 }

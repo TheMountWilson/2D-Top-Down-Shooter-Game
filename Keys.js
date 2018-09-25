@@ -51,6 +51,9 @@ function keyReleased(evt) {
     setKeyHoldState(evt.keyCode, "0");
 }
 
+
+
+/* MOUSE EVENT LISTENERS */
 function MouseDownHandler (evt){
     if (evt.button == 0) {
         keyLMouse = true;
@@ -60,7 +63,6 @@ function MouseDownHandler (evt){
     }
 }
 
-/* MOUSE EVENT LISTENERS */
 function MouseUpHandler (evt){
     if(evt.button == 0){
         keyLMouse = false;
