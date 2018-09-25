@@ -7,7 +7,7 @@
 <body>
     <canvas id="gameCanvas" width = "2000" height="2000" ></canvas>
     <button  onclick = "Output();" style = "width: 100px; top: 100px; left: 2100px; position: absolute;">Output</button>
-    <p id="output" style = "position: absolute; left: 2200px; top: 100px;"></p>
+    <p id="output" style = "position: absolute; left: 2200px; top: 100px;"></p> 
 </body>
 <script>
 var MAP = new Array (200*200);
@@ -84,24 +84,25 @@ function drawMap(){
 
 /* MOUSE EVENT LISTENERS */
 var keyLMouse = false;
-var keyRMouse = true;
+var keyRMouse = false;
 var mouseX = 0;
 var mouseY = 0;
 
 function MouseDownHandler (evt){
     if (evt.button == 0) {
         keyLMouse = true;
-        
+        editTile(true);
     }
     else if(evt.button == 2) {
         keyRMouse = true;
-        
+        editTile(false);
     }
 }
 
 function MouseUpHandler (evt){
     if(evt.button == 0){
         keyLMouse = false;
+        
         
     }
     else if(evt.button == 2){
@@ -112,12 +113,15 @@ function MouseUpHandler (evt){
 function updateMousePos (evt){
     var rect = canvas.getBoundingClientRect();
     var root = document.documentElement;
-    mouseX = evt.clientX - rect.left - root.scrollLeft;
-    mouseY = evt.clientY - rect.top - root.scrollTop;
+    mouseX = evt.clientX - rect.left ;//- root.scrollLeft; 
+    mouseY = evt.clientY - rect.top  //- root.scrollTop; 
 
     
     if (keyLMouse){
         editTile(true);
+    }
+    if(keyRMouse){
+        editTile(false);
     }
       
 }
