@@ -18,9 +18,11 @@ window.onload = function() {
     canvas.style.left = "100px";
     canvas.style.top = "100px";
     canvas.style.position = "absolute";
-    
-    canvas.onwheel = function(event){event.preventDefault();}
-    canvas.onmousewheel = function(event){event.preventDefault();}
+
+    canvas.addEventListener('contextmenu', function(evt) { 
+        evt.preventDefault();
+    }, false);
+
     document.addEventListener('mousedown', MouseDownHandler);
     document.addEventListener('mouseup', MouseUpHandler);
     document.addEventListener('mousemove', updateMousePos);
@@ -58,12 +60,13 @@ function Output(){
 function Main (){
     
     colorRect(0,0,canvas.width,canvas.height,"#d3fff6");
+    colorRect(mouseX-5,mouseY-5,10,10,"#4286f4");
     colorLine(0,0,0,canvas.height,"#000000",3);
     colorLine(0,canvas.height,canvas.width,canvas.height,"#000000",3);
     colorLine(canvas.width,canvas.height,canvas.width,0,"#000000",3);
     colorLine(canvas.width,0,0,0,"#000000",3);
 
-    colorText(Math.floor(mouseX) + "," + Math.floor(mouseY),mouseX+20,mouseY+20,"#000000","30px Arial ");
+    colorText(Math.floor(mouseX) + "," + Math.floor(mouseY),mouseX+20,mouseY+50,"#000000","30px Arial ");
     drawMap();
 
 }
@@ -88,15 +91,18 @@ var mouseY = 0;
 function MouseDownHandler (evt){
     if (evt.button == 0) {
         keyLMouse = true;
+        
     }
     else if(evt.button == 2) {
         keyRMouse = true;
+        
     }
 }
 
 function MouseUpHandler (evt){
     if(evt.button == 0){
         keyLMouse = false;
+        
     }
     else if(evt.button == 2){
         keyRMouse = false;
@@ -109,9 +115,14 @@ function updateMousePos (evt){
     mouseX = evt.clientX - rect.left - root.scrollLeft;
     mouseY = evt.clientY - rect.top - root.scrollTop;
 
+    
     if (keyLMouse){
-        MAP[(Math.floor(mouseY/10))*200+(Math.floor(mouseX/10))] = true;
+        editTile(true);
     }
+      
+}
+function editTile(setto){
+    MAP[(Math.floor(mouseY/10))*200+(Math.floor(mouseX/10))] = setto;
 }
 
 
