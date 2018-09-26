@@ -5,13 +5,14 @@
 <meta content="utf-8" http-equiv="encoding">
 </head>
 <body>
-    <canvas id="gameCanvas" width = "2000" height="2000" ></canvas>
-    <button  onclick = "Output();" style = "width: 100px; top: 100px; left: 2100px; position: absolute;">Output</button>
-    <p id="output" style = "position: absolute; left: 2200px; top: 100px;"></p> 
+    <canvas id="gameCanvas" width = "2000" height="2200" ></canvas>
+    <button  onclick = "ShowOutput();" style = "width: 100px; top: 100px; left: 2100px; position: absolute;">OUTPUT</button>
+    <button  onclick = "CopyOutputToClipboard();" style = "width: 100px; top: 130px; left: 2100px; position: absolute;">COPY</button>
+    <p id="output" style = "position: absolute; left: 2230px; top: 100px; font-size: 12pt; line-height: 14px"></p> 
 </body>
 <script>
 var MAP = new Array (200*200);
-
+var OutStrToClipBoard = "";
 window.onload = function() {
     canvas = document.getElementById('gameCanvas');
 
@@ -37,38 +38,55 @@ window.onload = function() {
     setInterval(Main, 1000/framesPerSecond);
 
 }
-function Output(){
-    var OutStr = "[";
+function ShowOutput(){
+    var OutStrToScreen = "[";
+    OutStrToClipBoard = "[";
     var counter = 0;
+
     for (let i = 0;i<MAP.length;i++){
-        if (counter ==200){
-            OutStr += "\n";
+        if (counter == 200){
+            OutStrToScreen += "\n";
             counter = 0;
         }
-        if(MAP[i])OutStr += "1,";
-        else OutStr += "0,";
+        if(MAP[i]){
+            OutStrToScreen += "1,";
+            OutStrToClipBoard += "1,";
+        }
+        else {
+            OutStrToScreen += "0,";
+            OutStrToClipBoard += "0,";
+        }
         counter++;
-        
     }
-    OutStr += "];"
-
-    document.getElementById('output').innerHTML = OutStr;
+    OutStrToScreen += "]"
+    OutStrToClipBoard += "]"
+    document.getElementById('output').innerHTML = OutStrToScreen;
     
 
-
+    console.log("MAP.length = "+MAP.length);
+}
+function CopyOutputToClipboard(){
+    if(OutStrToClipBoard == ""){
+        window.alert("Output string is empty");
+    }
+    else if(OutStrToClipBoard != ""){
+        navigator.clipboard.writeText(OutStrToClipBoard);
+        window.alert("Successfully copied to Clipboard");
+    }
 }
 function Main (){
     
     colorRect(0,0,canvas.width,canvas.height,"#d3fff6");
     colorRect(mouseX-5,mouseY-5,10,10,"#4286f4");
-    colorLine(0,0,0,canvas.height,"#000000",3);
-    colorLine(0,canvas.height,canvas.width,canvas.height,"#000000",3);
-    colorLine(canvas.width,canvas.height,canvas.width,0,"#000000",3);
+    colorLine(0,0,0,canvas.height-200,"#000000",3);
+    colorLine(0,canvas.height-200,canvas.width,canvas.height-200,"#000000",3);
+    colorLine(canvas.width,canvas.height-200,canvas.width,0,"#000000",3);
     colorLine(canvas.width,0,0,0,"#000000",3);
 
-    colorText(Math.floor(mouseX) + "," + Math.floor(mouseY),mouseX+20,mouseY+50,"#000000","30px Arial ");
-    drawMap();
 
+    drawMap();
+    colorText(Math.floor(mouseX) + "," + Math.floor(mouseY),mouseX+20,mouseY+50,"#000000","30px Arial ");
+    colorText(Math.floor(mouseX) + "," + Math.floor(mouseY),100,canvas.height-100,"#000000","40px Arial ");
 }
 
 
@@ -113,8 +131,8 @@ function MouseUpHandler (evt){
 function updateMousePos (evt){
     var rect = canvas.getBoundingClientRect();
     var root = document.documentElement;
-    mouseX = evt.clientX - rect.left ;//- root.scrollLeft; 
-    mouseY = evt.clientY - rect.top  //- root.scrollTop; 
+    mouseX = evt.clientX - rect.left ;
+    mouseY = evt.clientY - rect.top;
 
     
     if (keyLMouse){
@@ -126,9 +144,18 @@ function updateMousePos (evt){
       
 }
 function editTile(setto){
-    MAP[(Math.floor(mouseY/10))*200+(Math.floor(mouseX/10))] = setto;
+    var MouseIsOnTiles = CheckIfMouseIsOnTiles();
+    if(MouseIsOnTiles){
+        MAP[(Math.floor(mouseY/10))*200+(Math.floor(mouseX/10))] = setto;
+        console.log("MAP["+(Math.floor(mouseX/10))+","+Math.floor(mouseY/10)*200+"] set to: "+setto);
+    }
+    
 }
-
+function CheckIfMouseIsOnTiles(){
+    if( (mouseX>0&&mouseX<2000)&&
+        (mouseY>0&&mouseY<2000))return true;
+    else return false;
+}
 
 /* DRAWING */
 function colorRect(topLeftX,topLeftY, boxWidth, boxHeight, fillColor){
