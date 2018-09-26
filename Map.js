@@ -1,6 +1,6 @@
 let bulletArray  = [];
-let EnemyArray = [];
-let MedkitArray = [];
+let enemyArray = [];
+let medkitArray = [];
 
 var rectLocX = 0;
 var rectLocY = 0;
@@ -58,24 +58,18 @@ const MAP = [   1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
                 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1              
             ];
 
-function loadMap(){
-
-
-
-    EnemyArray.push(new Enemy(612,200,true,2,2,100,100,3));
-    EnemyArray.push(new Enemy(123,254,true,2,2,100,120,4));
-    EnemyArray.push(new Enemy(235,25,true,2,2,100,120,4));
-
-    MedkitArray.push(new Medkit(400,200,true,30));
+function LoadMap(){
+    enemyArray.push(new Enemy(612,200,true,2,2,100,100,3));
+    enemyArray.push(new Enemy(123,254,true,2,2,100,120,4));
+    enemyArray.push(new Enemy(235,25,true,2,2,100,120,4));
+    medkitArray.push(new Medkit(400,200,true,30));
     console.log(MAP.length);
-
-
 }
 
-function drawMap(){
+function DrawMap(){
     for (let i = 0;i<50;i++){
         for (let j = 0;j<50;j++){
-            if (MAP[i*50+j]==1)colorRect(100+j*10,100+i*10,10,10,"#4286f4");
+            if (MAP[i*50+j]==1)DrawRect(100+j*10,100+i*10,10,10,"#4286f4");
         }
     }
 }

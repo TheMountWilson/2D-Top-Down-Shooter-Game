@@ -2,12 +2,12 @@ var rectPosX = 100;
 var rectPosY = 100;
 var rectSpeedX = 5;
 var rectSpeedY = 5;
-var ReloadFramesSkipped = 0;
-var Reloading = false;
+var reloadFramesSkipped = 0;
+var reloading = false;
 var deadscreen = false;
 var playerHealth = 100;
 var deathnextframe = false;
-var ReloadPeriod = 5;
+var reloadPeriod = 5;
 
 var rectNORTHIsNotBlocked = true;
 var rectEASTIsNotBlocked = true;
@@ -15,40 +15,40 @@ var rectSOUTHIsNotBlocked = true;
 var rectWESTIsNotBlocked = true;
 
 function Reload () {
-    if (ReloadFramesSkipped==0){
-        ReloadFramesSkipped++;
+    if (reloadFramesSkipped==0){
+        reloadFramesSkipped++;
     }
-    else if(ReloadFramesSkipped>0 && ReloadFramesSkipped< 5){
-        ReloadFramesSkipped++;
+    else if(reloadFramesSkipped>0 && reloadFramesSkipped< 5){
+        reloadFramesSkipped++;
     }
-    else if (ReloadFramesSkipped == ReloadPeriod){
-        Reloading = false;
-        ReloadFramesSkipped = 0;
+    else if (reloadFramesSkipped == reloadPeriod){
+        reloading = false;
+        reloadFramesSkipped = 0;
     }
 }
-function checkHealth(){
+function CheckHealth(){
     if(deathnextframe)deadscreen = true;
     if(playerHealth<=0)deathnextframe = true;
 }
-function calculateMouseDirection(){
+function CalculateMouseDirection(){
     a = mouseX - rectPosX;
     b = mouseY - rectPosY;
     c = Math.sqrt((a*a)+ (b*b));
 }
-function drawScope(X,Y,color){
+function DrawScope(X,Y,color){
     canvasContext.fillStyle = color;
-    colorRect(X-1,Y-1,2,2);
-    colorLine(X-5,Y,X-13,Y,color,1);
-    colorLine(X+5,Y,X+13,Y,color,1);
-    colorLine(X,Y-5,X,Y-13,color,1);
-    colorLine(X,Y+5,X,Y+13,color,1);
+    DrawRect(X-1,Y-1,2,2);
+    DrawLine(X-5,Y,X-13,Y,color,1);
+    DrawLine(X+5,Y,X+13,Y,color,1);
+    DrawLine(X,Y-5,X,Y-13,color,1);
+    DrawLine(X,Y+5,X,Y+13,color,1);
 }
-function drawPlayerHealth(){
-    colorRect(rectPosX-10,rectPosY-15,20,4,"#5c6fb2");
-    colorRect(rectPosX-10,rectPosY-15,20*(playerHealth/100),4,"#a30101");
-    colorText(playerHealth,rectPosX-5,rectPosY-15,"#000000","15px arial");
+function DrawPlayerHealth(){
+    DrawRect(rectPosX-10,rectPosY-15,20,4,"#5c6fb2");
+    DrawRect(rectPosX-10,rectPosY-15,20*(playerHealth/100),4,"#a30101");
+    DrawText(playerHealth,rectPosX-5,rectPosY-15,"#000000","15px arial");
 }
-function movePlayer(){
+function MovePlayer(){
     rectLocX = Math.floor(rectPosX/10);
     rectLocY = Math.floor(rectPosY/10);
     //DetectRectangleCollisions();

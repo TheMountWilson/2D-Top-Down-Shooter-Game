@@ -1,19 +1,19 @@
-function updateEnemies(){
-    for (let i = 0; i < EnemyArray.length; i++){
-        EnemyArray[i].update();
-        if(EnemyArray[i].status == false)EnemyArray.splice(i,1);
+function UpdateEnemies(){
+    for (let i = 0; i < enemyArray.length; i++){
+        enemyArray[i].Update();
+        if(enemyArray[i].status == false)enemyArray.splice(i,1);
     }
 }
-function updateBullets(){
+function UpdateBullets(){
 
     for (let i = 0; i < bulletArray.length; i++){
-      bulletArray[i].update();
-      for (let j = 0; j < EnemyArray.length; j++){
+      bulletArray[i].Update();
+      for (let j = 0; j < enemyArray.length; j++){
         // PLAYER'S BULLET HITS ENEMY
-        if  (((bulletArray[i].x >= EnemyArray[j].x-2)&&(bulletArray[i].x <= EnemyArray[j].x+12))&&
-            ((bulletArray[i].y >= EnemyArray[j].y-2)&&(bulletArray[i].y <= EnemyArray[j].y+12))){
+        if  (((bulletArray[i].x >= enemyArray[j].x-2)&&(bulletArray[i].x <= enemyArray[j].x+12))&&
+            ((bulletArray[i].y >= enemyArray[j].y-2)&&(bulletArray[i].y <= enemyArray[j].y+12))){
             if(bulletArray[i].owner == "Player"){
-                EnemyArray[j].health -=5;
+                enemyArray[j].health -=5;
                 bulletArray[i].status = false;
             }
         }
@@ -29,13 +29,13 @@ function updateBullets(){
       if(bulletArray[i].status == false)bulletArray.splice(i,1);
     }
 }
-function updateMedkits(){
-    for (let i = 0; i < MedkitArray.length; i++){
-        MedkitArray[i].update();
-        if(((MedkitArray[i].x >= rectPosX-5)&&(MedkitArray[i].x <= rectPosX+10))&&
-            ((MedkitArray[i].y>=rectPosY-5)&&(MedkitArray[i].y<=rectPosY+10))){
-            MedkitArray[i].pickedUp();
+function UpdateMedkits(){
+    for (let i = 0; i < medkitArray.length; i++){
+        medkitArray[i].Update();
+        if(((medkitArray[i].x >= rectPosX-5)&&(medkitArray[i].x <= rectPosX+10))&&
+            ((medkitArray[i].y>=rectPosY-5)&&(medkitArray[i].y<=rectPosY+10))){
+            medkitArray[i].RemoveMedkitFromMap();
         }
-        if(MedkitArray[i].status == false)MedkitArray.splice(i,1);
+        if(medkitArray[i].status == false)medkitArray.splice(i,1);
     }
 }

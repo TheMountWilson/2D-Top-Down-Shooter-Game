@@ -1,47 +1,51 @@
 <!DOCTYPE html>
 <html lang = "en">
-<head>
-<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
-<meta content="utf-8" http-equiv="encoding">
-<script src="Keys.js"></script>
-<script src="Drawing.js"></script>
-<script src="Animations.js"></script>
-<script src="Classes.js"></script>
-<script src="Player.js"></script>
-<script src="Map.js"></script>
-<script src="Collisions.js"></script>
-<script src="Main.js"></script>
+    <head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+
+    <script src="Keys.js"></script>
+    <script src="Drawing.js"></script>
+    <script src="Animations.js"></script>
+    <script src="Classes.js"></script>
+    <script src="Player.js"></script>
+    <script src="Map.js"></script>
+    <script src="Collisions.js"></script>
+    <script src="Main.js"></script>
+
 </head>
-<body><canvas id="gameCanvas"></canvas></body>
+
+<body>
+    <canvas id="gameCanvas"></canvas>
+</body>
 
 <script>
+var CanvasWidth = window.innerWidth -100;
+var CanvasHeight = window.innerHeight-50;
+
 window.onload = function() {
     canvas = document.getElementById('gameCanvas');
-    canvas.width  = CanvasWidth;
-    canvas.height = CanvasHeight;
-    adjustScreen();
-    
-    canvas.onwheel = function(event){event.preventDefault();}
-    canvas.onmousewheel = function(event){event.preventDefault();}
-
+    canvas.onwheel = function(event){ event.preventDefault(); }
+    canvas.onmousewheel = function(event){ event.preventDefault(); }
+    canvas.addEventListener('contextmenu', function(event) { event.preventDefault();}, false);
     canvas.style.cursor = "none";
     canvas.focus();
     canvasContext = canvas.getContext('2d');
-    
-    initInput();
-    loadMap();
+    canvas.width  = window.innerWidth -100;
+    canvas.height = window.innerHeight-50;
+
+    AdjustScreen();
+    InitializeInputEventHandlers();
+    LoadMap();
+
     var framesPerSecond = 60;
     setInterval(Main, 1000/framesPerSecond);
-
 }
-window.onresize = function() {
-    adjustScreen();
-}
-function adjustScreen(){
 
+window.onresize = function() { AdjustScreen(); }
 
+function AdjustScreen(){
     canvas = document.getElementById('gameCanvas');
-    
     canvas.style.left = " "+window.innerWidth/2 - canvas.width/2+ "px";
     canvas.style.top = " "+window.innerHeight/2-canvas.width/2+ " px";
     canvas.style.position = "absolute";
