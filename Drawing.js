@@ -5,12 +5,12 @@ function DrawEverything() {
         DrawRect(rectPosX-5,rectPosY-5,10,10,"#000000");
         
         if (keyLMouse){
-            if (Reloading == false){
+            if (reloading == false){
                 bulletArray.push(new Bullet(rectPosX,rectPosY,true,(a/c)*20,(b/c)*20,"#000000","Player"));
-                Reloading = true;
+                reloading = true;
             }
         }
-        if (Reloading) Reload();
+        if (reloading) Reload();
 
         DrawPlayerHealth();
         DrawScope(mouseX,mouseY,"#000000");
@@ -33,9 +33,9 @@ function DrawDeadScreen(){
     DrawText("Press Ctrl+R to reset",canvas.width/2,(canvas.height/2)+35,"#000000","30px Arial","center");
 }
 function DrawDebugText(){
-    DrawText (ReloadFramesSkipped,10,10,"#000000","10px");
+    DrawText (reloadFramesSkipped,10,10,"#000000","10px");
     DrawText (bulletArray.length,10,20,"#000000","10px");
-    DrawText (EnemyArray.length,10,30,"#000000","10px");
+    DrawText (enemyArray.length,10,30,"#000000","10px");
 }
 
 /* BASIC ELEMENTS */

@@ -95,7 +95,7 @@ function Enemy (x,y,status,dx,dy,health,maxhealth,dmg){
         if (this.Reloading) this.Reload();
     }
     this.Shoot = function (){
-        this.aim();
+        this.Aim();
         bulletArray.push(new Bullet(this.x,this.y,true,(this.a/this.c)*20,(this.b/this.c)*20,"#ff0000","Enemy"));
         this.Reloading = true;
     }
