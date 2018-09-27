@@ -90,7 +90,6 @@ function CalculateTileToIndex(tileCol, tileRow) {
 
     //drawBricks();
     DrawOnlyBricksOnScreen();
-    
     DrawRect(rectPosX, rectPosY, 10,10, 'black');
     DrawPlayerHealth();
     

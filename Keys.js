@@ -1,6 +1,8 @@
 String.prototype.replaceAt=function(index, replacement) {
     return this.substr(0, index) + replacement+ this.substr(index + replacement.length);
 }
+var CanvasWidth = window.innerWidth -100;
+var CanvasHeight = window.innerHeight-50;
 
 const KEY_LEFT_ARROW = 65;      // A
 const KEY_UP_ARROW = 87;        // W
