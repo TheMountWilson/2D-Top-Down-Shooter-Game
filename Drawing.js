@@ -33,10 +33,13 @@ function DrawDeadScreen(){
     DrawText("Press Ctrl+R to reset",canvas.width/2,(canvas.height/2)+35,"#000000","30px Arial","center");
 }
 function DrawDebugText(){
-    DrawText (reloadFramesSkipped,10,10,"#000000","10px");
-    DrawText (bulletArray.length,10,20,"#000000","10px");
-    DrawText (enemyArray.length,10,30,"#000000","10px");
+    //DrawText (reloadFramesSkipped,10,10,"#000000","10px");
+    //DrawText (bulletArray.length,10,20,"#000000","10px");
+    //DrawText (enemyArray.length,10,30,"#000000","10px");
+    DrawText("mouseX = " + Math.floor(mouseX) + " mouseY = " + Math.floor(mouseY),10,canvas.height-100,"#000000","14px Arial ");
+    DrawText("rectPosX = " + rectPosX + " rectPosY = " + rectPosY,10,canvas.height-80,"#000000","14px Arial ");
 }
+
 
 /* BASIC ELEMENTS */
 

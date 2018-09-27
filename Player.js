@@ -1,5 +1,5 @@
-var rectPosX = 100;
-var rectPosY = 100;
+var rectPosX = 1000;
+var rectPosY = 1000;
 var rectSpeedX = 5;
 var rectSpeedY = 5;
 var reloadFramesSkipped = 0;
@@ -102,7 +102,7 @@ function MovePlayer(){
             break;
 
         case "0101":
-            if (rectPosX<(canvas.width-5) && rectPosY>5){
+            if (rectPosX<(MAP_WIDTH-5) && rectPosY>5){
                 if(rectEASTIsNotBlocked && rectNORTHIsNotBlocked){
                     rectPosX+=rectSpeedX*0.7;
                     rectPosY-=rectSpeedY*0.7;
@@ -115,7 +115,7 @@ function MovePlayer(){
                     rectPosY-=rectSpeedY*0.7;
                     rectPosX = (rectLocX-1)*10+10;
                 }
-            }else if (rectPosX<(canvas.width-5)){
+            }else if (rectPosX<(MAP_WIDTH-5)){
                 rectPosX+=rectSpeedX;
             }else if (rectPosY>5){
                 rectPosY-=rectSpeedY;
@@ -123,7 +123,7 @@ function MovePlayer(){
             break;
 
         case "0001":
-            if(rectPosX<(canvas.width-5)){
+            if(rectPosX<(MAP_WIDTH-5)){
                 if(rectEASTIsNotBlocked){
                     rectPosX+=rectSpeedX;
                 }else if(rectEASTIsNotBlocked == false){
@@ -133,7 +133,7 @@ function MovePlayer(){
             break;
         
         case "0011":
-            if (rectPosX<(canvas.width-5) && rectPosY<(canvas.height-5)){
+            if (rectPosX<(MAP_WIDTH-5) && rectPosY<(MAP_HEIGHT-5)){
                 if(rectEASTIsNotBlocked && rectSOUTHIsNotBlocked) {
                     rectPosX+=rectSpeedX*0.7;
                     rectPosY+=rectSpeedY*0.7;
@@ -147,15 +147,15 @@ function MovePlayer(){
                     rectPosX = (rectLocX-1)*10+10;
                 }
 
-            }else if (rectPosY<(canvas.height-5)){
+            }else if (rectPosY<(MAP_HEIGHT-5)){
                 rectPosY+=rectSpeedY;
-            }else if (rectPosX<(canvas.width-5)){
+            }else if (rectPosX<(MAP_WIDTH-5)){
                 rectPosX+=rectSpeedX;
             }
             break;
 
         case "0010":
-            if(rectPosY<(canvas.height-5)){
+            if(rectPosY<(MAP_HEIGHT-5)){
                 if(rectSOUTHIsNotBlocked){
                     rectPosY+=rectSpeedY;
                 }
@@ -167,7 +167,7 @@ function MovePlayer(){
         
         case "1010":
         case "1011":
-            if (rectPosX>5 && rectPosY<(canvas.height-5)){
+            if (rectPosX>5 && rectPosY<(MAP_HEIGHT-5)){
                 if (rectWESTIsNotBlocked && rectSOUTHIsNotBlocked){
                     rectPosX-=rectSpeedX*0.7;
                     rectPosY+=rectSpeedY*0.7;
@@ -183,7 +183,7 @@ function MovePlayer(){
 
             }else if(rectPosX>5){
                 rectPosX-=rectSpeedX;
-            }else if(rectPosY<(canvas.height-5)){
+            }else if(rectPosY<(MAP_HEIGHT-5)){
                 rectPosY+=rectSpeedY;
             }
             break;

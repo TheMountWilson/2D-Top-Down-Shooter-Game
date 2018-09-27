@@ -10,8 +10,8 @@ var keyCombination = "0000";    // AWSD
 
 var keyLMouse = false;
 var keyRMouse = true;
-var mouseX = 0;
-var mouseY = 0;
+var mouseX = CanvasWidth/2;
+var mouseY = CanvasHeight/2;
 
 var a = 0;
 var b = 0;
