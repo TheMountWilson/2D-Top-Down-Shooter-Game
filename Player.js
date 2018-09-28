@@ -1,5 +1,5 @@
-var rectPosX = 1000;
-var rectPosY = 1000;
+var rectPosX = 500;
+var rectPosY = 500;
 var rectSpeedX = 5;
 var rectSpeedY = 5;
 var reloadFramesSkipped = 0;
@@ -31,8 +31,8 @@ function CheckHealth(){
     if(playerHealth<=0)deathnextframe = true;
 }
 function CalculateMouseDirection(){
-    a = mouseX - rectPosX;
-    b = mouseY - rectPosY;
+    a = mouseX - (CanvasWidth/2 + 5);
+    b = mouseY - (CanvasHeight/2 + 5);
     c = Math.sqrt((a*a)+ (b*b));
 }
 function DrawScope(X,Y,color){

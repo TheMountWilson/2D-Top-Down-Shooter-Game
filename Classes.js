@@ -26,7 +26,7 @@ function Bullet (x,y,status,dx,dy,color,owner){
     this.dy = dy;
     this.health = 1;
     this.color = color;
-    this.radius = 2;
+    this.radius = 3;
     this.owner = owner;
 
     this.Draw = function(){
@@ -34,6 +34,7 @@ function Bullet (x,y,status,dx,dy,color,owner){
     }
 
     this.Update = function(){
+        /*
         if (this.x + this.radius > CanvasWidth || this.x - this.radius < 0){
             this.dx = -this.dx
             this.health -=1
@@ -42,6 +43,7 @@ function Bullet (x,y,status,dx,dy,color,owner){
             this.dy = -this.dy
             this.health -=1
         }
+        */
         if (this.health <= 0) this.status = false;
         if (this.status){
             this.x += this.dx

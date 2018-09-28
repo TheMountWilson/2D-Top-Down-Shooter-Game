@@ -1,27 +1,87 @@
-function DrawEverything() {
+const BRICK_W = 20;
+const BRICK_H = 20;
+const BRICK_COLS = 200;
+const BRICK_ROWS = 200;
+const MAP_WIDTH = BRICK_W * BRICK_COLS;
+const MAP_HEIGHT = BRICK_H * BRICK_ROWS;
+
+var camPanX = 0.0;
+var camPanY = 0.0;
+
+
+/** START CAMERA CODE **/
+
+function CalculateTileToIndex(tileCol, tileRow) {
+    return (tileCol + BRICK_COLS*tileRow);
+}
+function isBrickAtTileCoord(brickTileCol, brickTileRow) {
+    var brickIndex = CalculateTileToIndex(brickTileCol, brickTileRow);
+    return (MAP[brickIndex] == 1);
+}
+function isBrickAtPixelCoord(hitPixelX, hitPixelY) {
+    var tileCol = hitPixelX / BRICK_W;
+    var tileRow = hitPixelY / BRICK_H;
+
+    tileCol = Math.floor( tileCol );
+    tileRow = Math.floor( tileRow );
+
+    if(tileCol < 0 || tileCol >= BRICK_COLS || tileRow < 0 || tileRow >= BRICK_ROWS) {
+        return false;
+    }
+    var brickIndex = CalculateTileToIndex(tileCol, tileRow);
+    return (MAP[brickIndex] == 1);
+}
+function InstantCamFollow() {
+    camPanX = rectPosX - canvas.width/2;
+    camPanY = rectPosY - canvas.height/2;
+}
+
+function DrawOnlyBricksOnScreen() {
+    var cameraLeftMostCol = Math.floor(camPanX / BRICK_W)-5;
+    var cameraTopMostRow = Math.floor(camPanY / BRICK_H)-5;
+    var colsThatFitOnScreen = Math.floor(canvas.width / BRICK_W);
+    var rowsThatFitOnScreen = Math.floor(canvas.height / BRICK_H);
+    var cameraRightMostCol = cameraLeftMostCol + colsThatFitOnScreen + 11;
+    var cameraBottomMostRow = cameraTopMostRow + rowsThatFitOnScreen + 10;
+
+    for(var eachCol=cameraLeftMostCol; eachCol<cameraRightMostCol; eachCol++) {
+        for(var eachRow=cameraTopMostRow; eachRow<cameraBottomMostRow; eachRow++) {
+        if( isBrickAtTileCoord(eachCol, eachRow) ) {
+            var brickLeftEdgeX = eachCol * BRICK_W;
+            var brickTopEdgeY = eachRow * BRICK_H;
+            DrawRect(brickLeftEdgeX, brickTopEdgeY,BRICK_W, BRICK_H, 'blue' );
+            }
+        }
+    }
+}
+
+function DrawEverythingCamera() {
     if (deadscreen == false){
-        DrawRect(0,0,canvas.width,canvas.height,"#d3fff6");
-        DrawMap();
-        DrawRect(rectPosX-5,rectPosY-5,10,10,"#000000");
-        
+        DrawRect(0, 0, canvas.width, canvas.height, '#d3fff6');
+
+        canvasContext.save(); 
+        canvasContext.translate(-camPanX - (mouseX-(CanvasWidth/2))/25,-camPanY - (mouseY-(CanvasHeight/2))/25);
+
+        DrawOnlyBricksOnScreen();
+        DrawRect(rectPosX, rectPosY, 10,10, 'black');
+        DrawPlayerHealth();
+        UpdateBullets();
+        UpdateEnemies();
+        UpdateMedkits();
+
+        canvasContext.restore(); 
+
         if (keyLMouse){
             if (reloading == false){
-                bulletArray.push(new Bullet(rectPosX,rectPosY,true,(a/c)*20,(b/c)*20,"#000000","Player"));
+                CalculateMouseDirection();
+                bulletArray.push(new Bullet(rectPosX+5,rectPosY+5,true,(a/c)*20,(b/c)*20,"#000000","Player"));
                 reloading = true;
             }
         }
         if (reloading) Reload();
 
-        DrawPlayerHealth();
         DrawScope(mouseX,mouseY,"#000000");
-        
-        UpdateBullets();
-        UpdateEnemies();
-        UpdateMedkits();
-
-
         DrawDebugText();
-    
     }
     else if (deadscreen){
         DrawDeadScreen();
@@ -38,11 +98,12 @@ function DrawDebugText(){
     //DrawText (enemyArray.length,10,30,"#000000","10px");
     DrawText("mouseX = " + Math.floor(mouseX) + " mouseY = " + Math.floor(mouseY),10,canvas.height-100,"#000000","14px Arial ");
     DrawText("rectPosX = " + rectPosX + " rectPosY = " + rectPosY,10,canvas.height-80,"#000000","14px Arial ");
+    DrawText("a = " + a + " b = "+ b,10,canvas.height-60,"#000000","14px Arial ")
+    DrawText("CanvasWidth = "+ CanvasWidth + " CanvasHeight = " + CanvasHeight,10,canvas.height-40,"#000000","14px Arial ")
 }
 
 
 /* BASIC ELEMENTS */
-
 function DrawRect(topLeftX,topLeftY, boxWidth, boxHeight, fillColor){
     canvasContext.fillStyle = fillColor;
     canvasContext.fillRect (topLeftX,topLeftY, boxWidth,boxHeight);
