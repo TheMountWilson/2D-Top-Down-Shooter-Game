@@ -8,9 +8,6 @@ const MAP_HEIGHT = BRICK_H * BRICK_ROWS;
 var camPanX = 0.0;
 var camPanY = 0.0;
 
-
-/** START CAMERA CODE **/
-
 function CalculateTileToIndex(tileCol, tileRow) {
     return (tileCol + BRICK_COLS*tileRow);
 }
@@ -38,10 +35,14 @@ function InstantCamFollow() {
 
 function DrawOnlyBricksOnScreen() {
     var cameraLeftMostCol = Math.floor(camPanX / BRICK_W)-5;
+    if (cameraLeftMostCol<0) cameraLeftMostCol = 0;
     var cameraTopMostRow = Math.floor(camPanY / BRICK_H)-5;
+
     var colsThatFitOnScreen = Math.floor(canvas.width / BRICK_W);
     var rowsThatFitOnScreen = Math.floor(canvas.height / BRICK_H);
+
     var cameraRightMostCol = cameraLeftMostCol + colsThatFitOnScreen + 11;
+    if (cameraRightMostCol > BRICK_COLS) cameraRightMostCol = BRICK_COLS;
     var cameraBottomMostRow = cameraTopMostRow + rowsThatFitOnScreen + 10;
 
     for(var eachCol=cameraLeftMostCol; eachCol<cameraRightMostCol; eachCol++) {
