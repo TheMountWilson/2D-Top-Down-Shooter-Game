@@ -5,7 +5,6 @@ function UpdateEnemies(){
     }
 }
 function UpdateBullets(){
-
     for (let i = 0; i < bulletArray.length; i++){
       bulletArray[i].Update();
       for (let j = 0; j < enemyArray.length; j++){
