@@ -34,7 +34,7 @@ function Bullet (x,y,status,dx,dy,color,owner){
     }
 
     this.Update = function(){
-        /*
+        /* WILL USE THAT LATER FOR COLLISIONS
         if (this.x + this.radius > CanvasWidth || this.x - this.radius < 0){
             this.dx = -this.dx
             this.health -=1
@@ -55,6 +55,7 @@ function Bullet (x,y,status,dx,dy,color,owner){
 
 function Enemy (x,y,status,dx,dy,health,maxhealth,dmg){
     Element.call(this,x,y,status);
+    
     this.dx = dx;
     this.dy = dy;
     this.health = health;

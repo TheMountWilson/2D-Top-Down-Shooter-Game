@@ -1,7 +1,6 @@
 function Main(){
-    CalculateMouseDirection();
     MovePlayer();
     InstantCamFollow();
-    DrawEverythingCamera()
+    DrawEverything()
     CheckHealth ();
 }

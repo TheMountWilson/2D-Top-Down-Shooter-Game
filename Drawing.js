@@ -1,3 +1,6 @@
+//  TODO: 
+//      Refactor Camera code
+
 const BRICK_W = 20;
 const BRICK_H = 20;
 const BRICK_COLS = 200;
@@ -8,6 +11,7 @@ const MAP_HEIGHT = BRICK_H * BRICK_ROWS;
 var camPanX = 0.0;
 var camPanY = 0.0;
 
+/** START of CAMERA CODE**/
 function CalculateTileToIndex(tileCol, tileRow) {
     return (tileCol + BRICK_COLS*tileRow);
 }
@@ -55,8 +59,9 @@ function DrawOnlyBricksOnScreen() {
         }
     }
 }
+/** END of CAMERA CODE**/
 
-function DrawEverythingCamera() {
+function DrawEverything() {
     if (deadscreen == false){
         DrawRect(0, 0, canvas.width, canvas.height, '#d3fff6');
 
@@ -74,7 +79,7 @@ function DrawEverythingCamera() {
 
         if (keyLMouse){
             if (reloading == false){
-                CalculateMouseDirection();
+                CalculateAimingDirection();
                 bulletArray.push(new Bullet(rectPosX+5,rectPosY+5,true,(a/c)*20,(b/c)*20,"#000000","Player"));
                 reloading = true;
             }
@@ -94,9 +99,9 @@ function DrawDeadScreen(){
     DrawText("Press Ctrl+R to reset",canvas.width/2,(canvas.height/2)+35,"#000000","30px Arial","center");
 }
 function DrawDebugText(){
-    //DrawText (reloadFramesSkipped,10,10,"#000000","10px");
-    //DrawText (bulletArray.length,10,20,"#000000","10px");
-    //DrawText (enemyArray.length,10,30,"#000000","10px");
+    DrawText (reloadFramesSkipped,10,10,"#000000","10px");
+    DrawText (bulletArray.length,10,20,"#000000","10px");
+    DrawText (enemyArray.length,10,30,"#000000","10px");
     DrawText("mouseX = " + Math.floor(mouseX) + " mouseY = " + Math.floor(mouseY),10,canvas.height-100,"#000000","14px Arial ");
     DrawText("rectPosX = " + rectPosX + " rectPosY = " + rectPosY,10,canvas.height-80,"#000000","14px Arial ");
     DrawText("a = " + a + " b = "+ b,10,canvas.height-60,"#000000","14px Arial ")

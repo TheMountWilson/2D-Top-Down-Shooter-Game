@@ -30,7 +30,7 @@ function CheckHealth(){
     if(deathnextframe)deadscreen = true;
     if(playerHealth<=0)deathnextframe = true;
 }
-function CalculateMouseDirection(){
+function CalculateAimingDirection(){
     a = mouseX - (CanvasWidth/2 + 5);
     b = mouseY - (CanvasHeight/2 + 5);
     c = Math.sqrt((a*a)+ (b*b));

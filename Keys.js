@@ -11,7 +11,7 @@ const KEY_RIGHT_ARROW = 68;     // D
 var keyCombination = "0000";    // AWSD
 
 var keyLMouse = false;
-var keyRMouse = true;
+var keyRMouse = false;
 var mouseX = CanvasWidth/2;
 var mouseY = CanvasHeight/2;
 

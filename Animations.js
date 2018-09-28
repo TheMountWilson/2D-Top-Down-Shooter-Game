@@ -1,3 +1,7 @@
+//  TODO: 
+//      Replace the name "Update" and "Animations" with something else
+//      Put the bullet collision check methods into Collisions.js and call them from here
+
 function UpdateEnemies(){
     for (let i = 0; i < enemyArray.length; i++){
         enemyArray[i].Update();
