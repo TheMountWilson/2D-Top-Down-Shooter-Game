@@ -5,6 +5,7 @@
     <meta content="utf-8" http-equiv="encoding">
 
     <script src="Keys.js"></script>
+    <script src="Conversions.js"></script>
     <script src="Drawing.js"></script>
     <script src="Animations.js"></script>
     <script src="Classes.js"></script>
@@ -13,6 +14,7 @@
     <script src="Map.js"></script>
     <script src="Collisions.js"></script>
     <script src="Main.js"></script>
+    
 
 </head>
 
@@ -35,7 +37,7 @@ window.onload = function() {
 
     AdjustScreen();
     InitializeInputEventHandlers();
-    LoadMap();
+    LoadMapElements();
 
     var framesPerSecond = 60;
     setInterval(Main, 1000/framesPerSecond);
