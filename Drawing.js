@@ -134,3 +134,15 @@ function DrawLine (startX,startY,endX,endY,strokeColor,strokeWidth){
     canvasContext.lineTo(endX,endY);
     canvasContext.stroke();
 }
+
+function DrawEmptyRect (topLeftX,topLeftY, boxWidth, boxHeight, strokeColor, strokeWidth){
+    canvasContext.strokeStyle = strokeColor;
+    canvasContext.lineWidth = strokeWidth;
+    canvasContext.beginPath();
+    canvasContext.moveTo(topLeftX,topLeftY);
+    canvasContext.lineTo(topLeftX+boxWidth,topLeftY);
+    canvasContext.lineTo(topLeftX+boxWidth,topLeftY+boxHeight);
+    canvasContext.lineTo(topLeftX,topLeftY+boxHeight);
+    canvasContext.lineTo(topLeftX,topLeftY);
+    canvasContext.stroke();
+}

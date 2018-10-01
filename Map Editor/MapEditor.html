@@ -15,6 +15,8 @@
 <script>
 var MAP = new Array (200*200);
 var OutStrToClipBoard = "";
+var selectedHeightLevel = 5;
+var selectedTexture = 0;
 window.onload = function() {
     canvas = document.getElementById('gameCanvas');
 
@@ -92,7 +94,57 @@ function Main (){
 
     drawMap();
     colorText(Math.floor(mouseX) + "," + Math.floor(mouseY),mouseX+20,mouseY+50,"#000000","30px Arial ");
-    colorText(Math.floor(mouseX) + "," + Math.floor(mouseY),100,canvas.height-100,"#000000","40px Arial ");
+    //colorText(Math.floor(mouseX) + "," + Math.floor(mouseY),100,canvas.height-100,"#000000","40px Arial ");
+
+    /* USER INTERFACE */
+    colorText ("Height Levels",10,canvas.height-170,"#000000","30px Arial");
+
+    colorText ("0",25,canvas.height-90,"#000000","30px Arial");
+    DrawEmptyRect(10,canvas.height-125,50,50,"#000000",2);
+
+    colorText ("1",85,canvas.height-90,"#000000","30px Arial");
+    DrawEmptyRect(70,canvas.height-125,50,50,"#000000",2);
+
+    colorText ("2",145,canvas.height-90,"#000000","30px Arial");
+    DrawEmptyRect(130,canvas.height-125,50,50,"#000000",2);
+
+    colorText ("3",205,canvas.height-90,"#000000","30px Arial");
+    DrawEmptyRect(190,canvas.height-125,50,50,"#000000",2);
+
+    colorText ("4",265,canvas.height-90,"#000000","30px Arial");
+    DrawEmptyRect(250,canvas.height-125,50,50,"#000000",2);
+
+    colorText ("5",325,canvas.height-90,"#000000","30px Arial");
+    DrawEmptyRect(310,canvas.height-125,50,50,"#000000",2);
+
+    colorText ("6",385,canvas.height-90,"#000000","30px Arial");
+    DrawEmptyRect(370,canvas.height-125,50,50,"#000000",2);
+
+    colorText ("7",445,canvas.height-90,"#000000","30px Arial");
+    DrawEmptyRect(430,canvas.height-125,50,50,"#000000",2);
+
+    colorLine(520,canvas.height-200,520,canvas.height,"#000000",3);
+
+    colorText ("Textures",550,canvas.height-170,"#000000","30px Arial");
+
+    colorRect (550,canvas.height-125,50,50,"#4286f4");
+    colorRect (610,canvas.height-125,50,50,"#4286f4");
+    colorRect (670,canvas.height-125,50,50,"#4286f4");
+    colorRect (730,canvas.height-125,50,50,"#4286f4");
+
+    DrawEmptyRect(5+(60*selectedHeightLevel),canvas.height-130,60,60,"#000000",3);
+    DrawEmptyRect(545+(60*selectedTexture),canvas.height-130,60,60,"#000000",3);
+
+    colorLine(800,canvas.height-200,800,canvas.height,"#000000",3);
+    colorText("Pass",820,canvas.height-170,"#000000","30px Arial");
+    colorRect (825,canvas.height-125,50,50,"#4286f4");
+    colorLine(900,canvas.height-200,900,canvas.height,"#000000",3);
+
+    colorText("Output",920,canvas.height-170,"#000000","30px Arial");
+
+    colorText("000000",920,canvas.height-85,"#000000","50px Arial");
+    colorText("A",1150,canvas.height-85,"#000000","50px Arial");
+    colorLine(1225,canvas.height-200,1225,canvas.height,"#000000",3);
 }
 
 
@@ -180,6 +232,17 @@ function colorLine (startX,startY,endX,endY,strokeColor,strokeWidth){
     canvasContext.beginPath();
     canvasContext.moveTo(startX,startY);
     canvasContext.lineTo(endX,endY);
+    canvasContext.stroke();
+}
+function DrawEmptyRect (topLeftX,topLeftY, boxWidth, boxHeight, strokeColor,strokeWidth){
+    canvasContext.strokeStyle = strokeColor;
+    canvasContext.lineWidth = strokeWidth;
+    canvasContext.beginPath();
+    canvasContext.moveTo(topLeftX,topLeftY);
+    canvasContext.lineTo(topLeftX+boxWidth,topLeftY);
+    canvasContext.lineTo(topLeftX+boxWidth,topLeftY+boxHeight);
+    canvasContext.lineTo(topLeftX,topLeftY+boxHeight);
+    canvasContext.lineTo(topLeftX,topLeftY);
     canvasContext.stroke();
 }
 
