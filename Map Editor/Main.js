@@ -1,5 +1,6 @@
 function Main (){
-    DrawRect(0,0,canvas.width,canvas.height,"#d3fff6");
+    MouseIsOnTiles = CheckIfMouseIsOnTiles();
+    MouseIsOnUserInterface = CheckIfMouseIsOnUserInterface();
     DrawMap();
     DrawUserInterface();
 }

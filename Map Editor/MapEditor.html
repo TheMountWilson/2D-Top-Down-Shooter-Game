@@ -3,12 +3,15 @@
 <head>
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
     <meta content="utf-8" http-equiv="encoding">
-    
+    <script src="../Conversions.js"></script>
     <script src="../Drawing.js"></script>
-    <script src="SavedLevel.js"></script>
-    <script src="Keys.js"></script>
-    <script src="EditorTools.js"></script>
     <script src="UserInterface.js"></script>
+    <script src="Keys.js"></script>
+    
+    
+    <script src="EditorTools.js"></script>
+
+    <script src="SavedLevel.js"></script>
     <script src="Map.js"></script>
     <script src="Main.js"></script>
     
@@ -24,8 +27,9 @@
 
 var MAP = new Array (200*200);
 var OutStrToClipBoard = "";
-var selectedHeightLevel = 5;
+var selectedHeightLevel = 0;
 var selectedTexture = 0;
+var passable = true;
 
 window.onload = function() {
     canvas = document.getElementById('gameCanvas');
@@ -35,7 +39,7 @@ window.onload = function() {
     canvas.addEventListener('contextmenu', function(evt) { 
         evt.preventDefault();
     }, false);
-    InitializeInputEventHandlers();
+    InitializeInputEventHandlers()
     for (let i = 0;i<MAP.length;i++){
         MAP[i] = false;
     }

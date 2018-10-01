@@ -32,10 +32,3 @@ function CopyOutputToClipboard(){
         window.alert("Copied to Clipboard");
     }
 }
-function editTile(setto){
-    var MouseIsOnTiles = CheckIfMouseIsOnTiles();
-    if(MouseIsOnTiles){
-        MAP[(Math.floor(mouseY/10))*200+(Math.floor(mouseX/10))] = setto;
-        console.log("MAP["+(Math.floor(mouseX/10))+","+Math.floor(mouseY/10)*200+"] set to: "+setto);
-    }
-}
