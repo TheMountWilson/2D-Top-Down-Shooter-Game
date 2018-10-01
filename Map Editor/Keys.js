@@ -1,8 +1,15 @@
-/* MOUSE EVENT LISTENERS */
 var keyLMouse = false;
 var keyRMouse = false;
 var mouseX = 0;
 var mouseY = 0;
+
+function InitializeInputEventHandlers(){
+    document.addEventListener('mousedown', MouseDownHandler);
+    document.addEventListener('mouseup', MouseUpHandler);
+    document.addEventListener('mousemove', updateMousePos);
+    
+}
+
 
 function MouseDownHandler (evt){
     if (evt.button == 0) {

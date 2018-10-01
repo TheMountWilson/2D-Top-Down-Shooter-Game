@@ -3,7 +3,15 @@
 <head>
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
     <meta content="utf-8" http-equiv="encoding">
+    
+    <script src="../Drawing.js"></script>
     <script src="SavedLevel.js"></script>
+    <script src="Keys.js"></script>
+    <script src="EditorTools.js"></script>
+    <script src="UserInterface.js"></script>
+    <script src="Map.js"></script>
+    <script src="Main.js"></script>
+    
 </head>
 <body>
     <canvas id="gameCanvas" width = "2000" height="2200" ></canvas>
@@ -13,242 +21,29 @@
     <p id="output" style = "position: absolute; left: 2230px; top: 100px; font-size: 12pt; line-height: 14px"></p> 
 </body>
 <script>
+
 var MAP = new Array (200*200);
 var OutStrToClipBoard = "";
 var selectedHeightLevel = 5;
 var selectedTexture = 0;
+
 window.onload = function() {
     canvas = document.getElementById('gameCanvas');
-
     canvas.style.left = "100px";
     canvas.style.top = "100px";
     canvas.style.position = "absolute";
-
     canvas.addEventListener('contextmenu', function(evt) { 
         evt.preventDefault();
     }, false);
-
-    document.addEventListener('mousedown', MouseDownHandler);
-    document.addEventListener('mouseup', MouseUpHandler);
-    document.addEventListener('mousemove', updateMousePos);
+    InitializeInputEventHandlers();
     for (let i = 0;i<MAP.length;i++){
         MAP[i] = false;
     }
     canvas.focus();
     canvasContext = canvas.getContext('2d');
-    
-
     var framesPerSecond = 60;
     setInterval(Main, 1000/framesPerSecond);
 }
-
-function LoadSavedLevel(){
-    MAP = GetSavedLevel();
-}
-
-function ShowOutput(){
-    var OutStrToScreen = "[";
-    OutStrToClipBoard = "[";
-    var counter = 0;
-
-    for (let i = 0;i<MAP.length;i++){
-        if (counter == 200){
-            OutStrToScreen += "\n";
-            counter = 0;
-        }
-        if(MAP[i]){
-            OutStrToScreen += "1,";
-            OutStrToClipBoard += "1,";
-        }
-        else {
-            OutStrToScreen += "0,";
-            OutStrToClipBoard += "0,";
-        }
-        counter++;
-    }
-    OutStrToScreen += "]"
-    OutStrToClipBoard += "]"
-    document.getElementById('output').innerHTML = OutStrToScreen;
-    
-
-    console.log("MAP.length = "+MAP.length);
-}
-function CopyOutputToClipboard(){
-    if(OutStrToClipBoard == ""){
-        window.alert("Output string is empty");
-    }
-    else if(OutStrToClipBoard != ""){
-        navigator.clipboard.writeText(OutStrToClipBoard);
-        window.alert("Copied to Clipboard");
-    }
-}
-function Main (){
-    
-    colorRect(0,0,canvas.width,canvas.height,"#d3fff6");
-    colorRect(mouseX-5,mouseY-5,10,10,"#4286f4");
-    colorLine(0,0,0,canvas.height-200,"#000000",3);
-    colorLine(0,canvas.height-200,canvas.width,canvas.height-200,"#000000",3);
-    colorLine(canvas.width,canvas.height-200,canvas.width,0,"#000000",3);
-    colorLine(canvas.width,0,0,0,"#000000",3);
-
-
-    drawMap();
-    colorText(Math.floor(mouseX) + "," + Math.floor(mouseY),mouseX+20,mouseY+50,"#000000","30px Arial ");
-    //colorText(Math.floor(mouseX) + "," + Math.floor(mouseY),100,canvas.height-100,"#000000","40px Arial ");
-
-    /* USER INTERFACE */
-    colorText ("Height Levels",10,canvas.height-170,"#000000","30px Arial");
-
-    colorText ("0",25,canvas.height-90,"#000000","30px Arial");
-    DrawEmptyRect(10,canvas.height-125,50,50,"#000000",2);
-
-    colorText ("1",85,canvas.height-90,"#000000","30px Arial");
-    DrawEmptyRect(70,canvas.height-125,50,50,"#000000",2);
-
-    colorText ("2",145,canvas.height-90,"#000000","30px Arial");
-    DrawEmptyRect(130,canvas.height-125,50,50,"#000000",2);
-
-    colorText ("3",205,canvas.height-90,"#000000","30px Arial");
-    DrawEmptyRect(190,canvas.height-125,50,50,"#000000",2);
-
-    colorText ("4",265,canvas.height-90,"#000000","30px Arial");
-    DrawEmptyRect(250,canvas.height-125,50,50,"#000000",2);
-
-    colorText ("5",325,canvas.height-90,"#000000","30px Arial");
-    DrawEmptyRect(310,canvas.height-125,50,50,"#000000",2);
-
-    colorText ("6",385,canvas.height-90,"#000000","30px Arial");
-    DrawEmptyRect(370,canvas.height-125,50,50,"#000000",2);
-
-    colorText ("7",445,canvas.height-90,"#000000","30px Arial");
-    DrawEmptyRect(430,canvas.height-125,50,50,"#000000",2);
-
-    colorLine(520,canvas.height-200,520,canvas.height,"#000000",3);
-
-    colorText ("Textures",550,canvas.height-170,"#000000","30px Arial");
-
-    colorRect (550,canvas.height-125,50,50,"#4286f4");
-    colorRect (610,canvas.height-125,50,50,"#4286f4");
-    colorRect (670,canvas.height-125,50,50,"#4286f4");
-    colorRect (730,canvas.height-125,50,50,"#4286f4");
-
-    DrawEmptyRect(5+(60*selectedHeightLevel),canvas.height-130,60,60,"#000000",3);
-    DrawEmptyRect(545+(60*selectedTexture),canvas.height-130,60,60,"#000000",3);
-
-    colorLine(800,canvas.height-200,800,canvas.height,"#000000",3);
-    colorText("Pass",820,canvas.height-170,"#000000","30px Arial");
-    colorRect (825,canvas.height-125,50,50,"#4286f4");
-    colorLine(900,canvas.height-200,900,canvas.height,"#000000",3);
-
-    colorText("Output",920,canvas.height-170,"#000000","30px Arial");
-
-    colorText("000000",920,canvas.height-85,"#000000","50px Arial");
-    colorText("A",1150,canvas.height-85,"#000000","50px Arial");
-    colorLine(1225,canvas.height-200,1225,canvas.height,"#000000",3);
-}
-
-
-function drawMap(){
-    for (let i = 0;i<200;i++){
-        for (let j = 0;j<200;j++){
-            if (MAP[i*200+j])colorRect(j*10,i*10,10,10,"#4286f4");
-        }
-    }
-}
-
-
-
-/* MOUSE EVENT LISTENERS */
-var keyLMouse = false;
-var keyRMouse = false;
-var mouseX = 0;
-var mouseY = 0;
-
-function MouseDownHandler (evt){
-    if (evt.button == 0) {
-        keyLMouse = true;
-        editTile(true);
-    }
-    else if(evt.button == 2) {
-        keyRMouse = true;
-        editTile(false);
-    }
-}
-
-function MouseUpHandler (evt){
-    if(evt.button == 0){
-        keyLMouse = false;
-        
-        
-    }
-    else if(evt.button == 2){
-        keyRMouse = false;
-    }
-}
-
-function updateMousePos (evt){
-    var rect = canvas.getBoundingClientRect();
-    var root = document.documentElement;
-    mouseX = evt.clientX - rect.left ;
-    mouseY = evt.clientY - rect.top;
-
-    
-    if (keyLMouse){
-        editTile(true);
-    }
-    if(keyRMouse){
-        editTile(false);
-    }
-      
-}
-function editTile(setto){
-    var MouseIsOnTiles = CheckIfMouseIsOnTiles();
-    if(MouseIsOnTiles){
-        MAP[(Math.floor(mouseY/10))*200+(Math.floor(mouseX/10))] = setto;
-        console.log("MAP["+(Math.floor(mouseX/10))+","+Math.floor(mouseY/10)*200+"] set to: "+setto);
-    }
-    
-}
-function CheckIfMouseIsOnTiles(){
-    if( (mouseX>0&&mouseX<2000)&&
-        (mouseY>0&&mouseY<2000))return true;
-    else return false;
-}
-
-/* DRAWING */
-function colorRect(topLeftX,topLeftY, boxWidth, boxHeight, fillColor){
-    canvasContext.fillStyle = fillColor;
-    canvasContext.fillRect (topLeftX,topLeftY, boxWidth,boxHeight);
-}
-function colorText(showWords, textX, textY, fillColor,font,align = "start"){
-    canvasContext.fillStyle = fillColor;
-    canvasContext.font = font;
-    canvasContext.textAlign=align;
-    canvasContext.fillText(showWords,textX,textY);
-}
-function colorLine (startX,startY,endX,endY,strokeColor,strokeWidth){
-    canvasContext.strokeStyle = strokeColor;
-    canvasContext.lineWidth = strokeWidth;
-    canvasContext.beginPath();
-    canvasContext.moveTo(startX,startY);
-    canvasContext.lineTo(endX,endY);
-    canvasContext.stroke();
-}
-function DrawEmptyRect (topLeftX,topLeftY, boxWidth, boxHeight, strokeColor,strokeWidth){
-    canvasContext.strokeStyle = strokeColor;
-    canvasContext.lineWidth = strokeWidth;
-    canvasContext.beginPath();
-    canvasContext.moveTo(topLeftX,topLeftY);
-    canvasContext.lineTo(topLeftX+boxWidth,topLeftY);
-    canvasContext.lineTo(topLeftX+boxWidth,topLeftY+boxHeight);
-    canvasContext.lineTo(topLeftX,topLeftY+boxHeight);
-    canvasContext.lineTo(topLeftX,topLeftY);
-    canvasContext.stroke();
-}
-
-
-
-
 </script>
 
 </html>
