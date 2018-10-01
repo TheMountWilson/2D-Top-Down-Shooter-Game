@@ -118,3 +118,75 @@ function ConvertBase64ToBinary(symbol){
     }
     return output;
 }
+
+function ConvertBinaryToBase64 (input){
+    var key = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+    var output;
+    switch (input){
+        case "000000": output = key.charAt(0);break;
+        case "000001": output = key.charAt(1);break;
+        case "000010": output = key.charAt(2);break;
+        case "000011": output = key.charAt(3);break;
+        case "000100": output = key.charAt(4);break;
+        case "000101": output = key.charAt(5);break;
+        case "000110": output = key.charAt(6);break;
+        case "000111": output = key.charAt(7);break;
+        case "001000": output = key.charAt(8);break;
+        case "001001": output = key.charAt(9);break;
+        case "001010": output = key.charAt(10);break;
+        case "001011": output = key.charAt(11);break;
+        case "001100": output = key.charAt(12);break;
+        case "001101": output = key.charAt(13);break;
+        case "001110": output = key.charAt(14);break;
+        case "001111": output = key.charAt(15);break;
+        case "010000": output = key.charAt(16);break;
+        case "010001": output = key.charAt(17);break;
+        case "010010": output = key.charAt(18);break;
+        case "010011": output = key.charAt(19);break;
+        case "010100": output = key.charAt(20);break;
+        case "010101": output = key.charAt(21);break;
+        case "010110": output = key.charAt(22);break;
+        case "010111": output = key.charAt(23);break;
+        case "011000": output = key.charAt(24);break;
+        case "011001": output = key.charAt(25);break;
+        case "011010": output = key.charAt(26);break;
+        case "011011": output = key.charAt(27);break;
+        case "011100": output = key.charAt(28);break;
+        case "011101": output = key.charAt(29);break;
+        case "011110": output = key.charAt(30);break;
+        case "011111": output = key.charAt(31);break;
+        case "100000": output = key.charAt(32);break;
+        case "100001": output = key.charAt(33);break;
+        case "100010": output = key.charAt(34);break;
+        case "100011": output = key.charAt(35);break;
+        case "100100": output = key.charAt(36);break;
+        case "100101": output = key.charAt(37);break;
+        case "100110": output = key.charAt(38);break;
+        case "100111": output = key.charAt(39);break;
+        case "101000": output = key.charAt(40);break;
+        case "101001": output = key.charAt(41);break;
+        case "101010": output = key.charAt(42);break;
+        case "101011": output = key.charAt(43);break;
+        case "101100": output = key.charAt(44);break;
+        case "101101": output = key.charAt(45);break;
+        case "101110": output = key.charAt(46);break;
+        case "101111": output = key.charAt(47);break;
+        case "110000": output = key.charAt(48);break;
+        case "110001": output = key.charAt(49);break;
+        case "110010": output = key.charAt(50);break;
+        case "110011": output = key.charAt(51);break;
+        case "110100": output = key.charAt(52);break;
+        case "110101": output = key.charAt(53);break;
+        case "110110": output = key.charAt(54);break;
+        case "110111": output = key.charAt(55);break;
+        case "111000": output = key.charAt(56);break;
+        case "111001": output = key.charAt(57);break;
+        case "111010": output = key.charAt(58);break;
+        case "111011": output = key.charAt(59);break;
+        case "111100": output = key.charAt(60);break;
+        case "111101": output = key.charAt(61);break;
+        case "111110": output = key.charAt(62);break;
+        case "111111": output = key.charAt(63);break;
+    }
+    return output;
+}
