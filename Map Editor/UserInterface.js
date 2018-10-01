@@ -1,17 +1,20 @@
-function CheckIfMouseIsOnTiles(){
-    if( (mouseX>0&&mouseX<2000)&&
-        (mouseY>0&&mouseY<2000))return true;
-    else return false;
-}
-function DrawUserInterface(){
-    DrawRect(mouseX-5,mouseY-5,10,10,"#4286f4");
-    DrawLine(0,0,0,canvas.height-200,"#000000",3);
-    DrawLine(0,canvas.height-200,canvas.width,canvas.height-200,"#000000",3);
-    DrawLine(canvas.width,canvas.height-200,canvas.width,0,"#000000",3);
-    DrawLine(canvas.width,0,0,0,"#000000",3);
+var outputBinary = "100000";
+var outputBase64 = "g";
 
-    DrawText(Math.floor(mouseX) + "," + Math.floor(mouseY),mouseX+20,mouseY+50,"#000000","30px Arial ");
-    //DrawText(Math.floor(mouseX) + "," + Math.floor(mouseY),100,canvas.height-100,"#000000","40px Arial ");
+function DrawUserInterface(){
+    
+    DrawEmptyRect(0,0,canvas.width,canvas.height-200,"#000000",3);
+
+    if(MouseIsOnTiles){
+        if(passable){
+            DrawRect(mouseX-5,mouseY-5,10,10,"#4286f4");
+        }
+        else if (passable == false){
+            DrawRect(mouseX-5,mouseY-5,10,10,"#ff0000");
+        }
+        
+        DrawText(Math.floor(mouseX) + "," + Math.floor(mouseY),mouseX+20,mouseY+50,"#000000","30px Arial ");
+    }
     DrawText ("Height Levels",10,canvas.height-170,"#000000","30px Arial");
 
     DrawText ("0",25,canvas.height-90,"#000000","30px Arial");
@@ -52,13 +55,111 @@ function DrawUserInterface(){
 
     DrawLine(800,canvas.height-200,800,canvas.height,"#000000",3);
     DrawText("Pass",820,canvas.height-170,"#000000","30px Arial");
-    DrawRect (825,canvas.height-125,50,50,"#4286f4");
+
+    if (passable) DrawRect (825,canvas.height-125,50,50,"#4286f4");
+    else if(passable == false) DrawRect (825,canvas.height-125,50,50,"#ff0000");
     DrawLine(900,canvas.height-200,900,canvas.height,"#000000",3);
 
     DrawText("Output",920,canvas.height-170,"#000000","30px Arial");
 
-    DrawText("000000",920,canvas.height-85,"#000000","50px Arial");
-    DrawText("A",1150,canvas.height-85,"#000000","50px Arial");
+    DrawText(outputBinary,920,canvas.height-85,"#000000","50px Arial");
+    DrawText(outputBase64,1150,canvas.height-85,"#000000","50px Arial");
     DrawLine(1225,canvas.height-200,1225,canvas.height,"#000000",3);
- 
+}
+
+function HandleUserInterfaceClickEvent (){
+    if(((mouseX>10)&&(mouseX<10+50))&&((mouseY>canvas.height-125)&&(mouseY<canvas.height-125+50))){
+        selectedHeightLevel = 0;
+        outputBinary=outputBinary.replaceAt(1,'0');
+        outputBinary=outputBinary.replaceAt(2,'0');
+        outputBinary=outputBinary.replaceAt(3,'0');
+        outputBase64 = ConvertBinaryToBase64(outputBinary);
+    }
+    if(((mouseX>70)&&(mouseX<70+50))&&((mouseY>canvas.height-125)&&(mouseY<canvas.height-125+50))){
+        selectedHeightLevel = 1;
+        outputBinary=outputBinary.replaceAt(1,'0');
+        outputBinary=outputBinary.replaceAt(2,'0');
+        outputBinary=outputBinary.replaceAt(3,'1');
+        outputBase64 = ConvertBinaryToBase64(outputBinary);
+    }
+    if(((mouseX>130)&&(mouseX<130+50))&&((mouseY>canvas.height-125)&&(mouseY<canvas.height-125+50))){
+        selectedHeightLevel = 2;
+        outputBinary=outputBinary.replaceAt(1,'0');
+        outputBinary=outputBinary.replaceAt(2,'1');
+        outputBinary=outputBinary.replaceAt(3,'0');
+        outputBase64 = ConvertBinaryToBase64(outputBinary);
+    }
+    if(((mouseX>190)&&(mouseX<190+50))&&((mouseY>canvas.height-125)&&(mouseY<canvas.height-125+50))){
+        selectedHeightLevel = 3;
+        outputBinary=outputBinary.replaceAt(1,'0');
+        outputBinary=outputBinary.replaceAt(2,'1');
+        outputBinary=outputBinary.replaceAt(3,'1');
+        outputBase64 = ConvertBinaryToBase64(outputBinary);
+    }
+    if(((mouseX>250)&&(mouseX<250+50))&&((mouseY>canvas.height-125)&&(mouseY<canvas.height-125+50))){
+        selectedHeightLevel = 4;
+        outputBinary=outputBinary.replaceAt(1,'1');
+        outputBinary=outputBinary.replaceAt(2,'0');
+        outputBinary=outputBinary.replaceAt(3,'0');
+        outputBase64 = ConvertBinaryToBase64(outputBinary);
+    }
+    if(((mouseX>310)&&(mouseX<310+50))&&((mouseY>canvas.height-125)&&(mouseY<canvas.height-125+50))){
+        selectedHeightLevel = 5;
+        outputBinary=outputBinary.replaceAt(1,'1');
+        outputBinary=outputBinary.replaceAt(2,'0');
+        outputBinary=outputBinary.replaceAt(3,'1');
+        outputBase64 = ConvertBinaryToBase64(outputBinary);
+    }
+    if(((mouseX>370)&&(mouseX<370+50))&&((mouseY>canvas.height-125)&&(mouseY<canvas.height-125+50))){
+        selectedHeightLevel = 6;
+        outputBinary=outputBinary.replaceAt(1,'1');
+        outputBinary=outputBinary.replaceAt(2,'1');
+        outputBinary=outputBinary.replaceAt(3,'0');
+        outputBase64 = ConvertBinaryToBase64(outputBinary);
+    }
+    if(((mouseX>430)&&(mouseX<430+50))&&((mouseY>canvas.height-125)&&(mouseY<canvas.height-125+50))){
+        selectedHeightLevel = 7;
+        outputBinary=outputBinary.replaceAt(1,'1');
+        outputBinary=outputBinary.replaceAt(2,'1');
+        outputBinary=outputBinary.replaceAt(3,'1');
+        outputBase64 = ConvertBinaryToBase64(outputBinary);
+    }
+    
+    if(((mouseX>550)&&(mouseX<550+50))&&((mouseY>canvas.height-125)&&(mouseY<canvas.height-125+50))){
+        selectedTexture = 0;
+        outputBinary=outputBinary.replaceAt(4,'0');
+        outputBinary=outputBinary.replaceAt(5,'0');
+        outputBase64 = ConvertBinaryToBase64(outputBinary);
+    }
+    if(((mouseX>610)&&(mouseX<610+50))&&((mouseY>canvas.height-125)&&(mouseY<canvas.height-125+50))){
+        selectedTexture = 1;
+        outputBinary=outputBinary.replaceAt(4,'0');
+        outputBinary=outputBinary.replaceAt(5,'1');
+        outputBase64 = ConvertBinaryToBase64(outputBinary);
+    }
+    if(((mouseX>670)&&(mouseX<670+50))&&((mouseY>canvas.height-125)&&(mouseY<canvas.height-125+50))){
+        selectedTexture = 2;
+        outputBinary=outputBinary.replaceAt(4,'1');
+        outputBinary=outputBinary.replaceAt(5,'0');
+        outputBase64 = ConvertBinaryToBase64(outputBinary);
+    }
+    if(((mouseX>730)&&(mouseX<730+50))&&((mouseY>canvas.height-125)&&(mouseY<canvas.height-125+50))){
+        selectedTexture = 3;
+        outputBinary=outputBinary.replaceAt(4,'1');
+        outputBinary=outputBinary.replaceAt(5,'1');
+        outputBase64 = ConvertBinaryToBase64(outputBinary);
+    }
+
+    if(((mouseX>825)&&(mouseX<825+50))&&((mouseY>canvas.height-125)&&(mouseY<canvas.height-125+50))){
+        if(passable){
+            outputBinary=outputBinary.replaceAt(0,'0');
+            outputBase64 = ConvertBinaryToBase64(outputBinary);
+            passable = false;
+        } 
+        else if(passable == false){
+            outputBinary=outputBinary.replaceAt(0,'1');
+            outputBase64 = ConvertBinaryToBase64(outputBinary);
+            passable = true;
+        } 
+    }
 }
