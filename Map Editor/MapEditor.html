@@ -5,6 +5,7 @@
     <meta content="utf-8" http-equiv="encoding">
     <script src="../Conversions.js"></script>
     <script src="../Drawing.js"></script>
+    <script src="ImageLoading.js"></script>
     <script src="UserInterface.js"></script>
     <script src="Keys.js"></script>
     
@@ -26,6 +27,7 @@
 <script>
 
 var MAP = new Array (200*200);
+
 var OutStrToClipBoard = "";
 var selectedHeightLevel = 0;
 var selectedTexture = 0;
@@ -40,11 +42,16 @@ window.onload = function() {
         evt.preventDefault();
     }, false);
     InitializeInputEventHandlers()
+    
     for (let i = 0;i<MAP.length;i++){
-        MAP[i] = false;
+        MAP[i] = "*";
     }
+   
     canvas.focus();
     canvasContext = canvas.getContext('2d');
+    loadImages();
+}
+function Launch (){
     var framesPerSecond = 60;
     setInterval(Main, 1000/framesPerSecond);
 }

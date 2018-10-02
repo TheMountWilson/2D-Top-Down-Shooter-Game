@@ -1,8 +1,8 @@
 //  TODO: 
 //      Refactor Camera code
 
-const BRICK_W = 20;
-const BRICK_H = 20;
+const BRICK_W = 32;
+const BRICK_H = 32;
 const BRICK_COLS = 200;
 const BRICK_ROWS = 200;
 const MAP_WIDTH = BRICK_W * BRICK_COLS;
