@@ -20,7 +20,7 @@ function LoadMapLayoutImage(index,fileName){
 function loadImages(){
     var imageList = [
         {name: "A", theFile: "0_0_0.png"},
-        {name: "B", theFile: "0_0_2.png"},
+        {name: "C", theFile: "0_0_2.png"},
 
         {name: "k", theFile: "1_1_0.png"},
         {name: "l", theFile: "1_1_1.png"},

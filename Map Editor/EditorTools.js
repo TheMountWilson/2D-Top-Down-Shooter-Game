@@ -8,14 +8,8 @@ function ShowOutput(){
             OutStrToScreen += "\n";
             counter = 0;
         }
-        if(MAP[i]){
-            OutStrToScreen += "1,";
-            OutStrToClipBoard += "1,";
-        }
-        else {
-            OutStrToScreen += "0,";
-            OutStrToClipBoard += "0,";
-        }
+            OutStrToScreen += MAP[i];
+            OutStrToClipBoard += MAP[i];
         counter++;
     }
     OutStrToScreen += "]"
