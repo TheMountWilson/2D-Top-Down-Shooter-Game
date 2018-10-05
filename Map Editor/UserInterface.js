@@ -43,28 +43,22 @@ function DrawUserInterface(){
 
     DrawLine(520,canvas.height-200,520,canvas.height,"#000000",3);
 
-    DrawText ("Textures",550,canvas.height-170,"#000000","30px Arial");
+    DrawText ("Pass",530,canvas.height-170,"#000000","30px Arial");
 
-    DrawRect (550,canvas.height-125,50,50,"#4286f4");
-    DrawRect (610,canvas.height-125,50,50,"#4286f4");
-    DrawRect (670,canvas.height-125,50,50,"#4286f4");
-    DrawRect (730,canvas.height-125,50,50,"#4286f4");
+    if (passable) DrawRect (540,canvas.height-125,50,50,"#4286f4");
+    else if(passable == false) DrawRect (540,canvas.height-125,50,50,"#ff0000");
+    DrawLine(620,canvas.height-200,620,canvas.height,"#000000",3);
 
-    DrawEmptyRect(5+(60*selectedHeightLevel),canvas.height-130,60,60,"#000000",3);
-    DrawEmptyRect(545+(60*selectedTexture),canvas.height-130,60,60,"#000000",3);
+    DrawText("Textures",630,canvas.height-170,"#000000","30px Arial");
 
-    DrawLine(800,canvas.height-200,800,canvas.height,"#000000",3);
-    DrawText("Pass",820,canvas.height-170,"#000000","30px Arial");
+    DrawRect(650,canvas.height-150,50,50,"#ff0000");
+    DrawEmptyRect(645,canvas.height-155,60,60,"#000000",2);
+    DrawRect(650,canvas.height-80,50,50,"#ff0000");
+    DrawRect(720,canvas.height-150,50,50,"#ff0000");
+    DrawRect(720,canvas.height-80,50,50,"#ff0000");
+    DrawRect(790,canvas.height-150,50,50,"#ff0000");
+    DrawRect(790,canvas.height-80,50,50,"#ff0000");
 
-    if (passable) DrawRect (825,canvas.height-125,50,50,"#4286f4");
-    else if(passable == false) DrawRect (825,canvas.height-125,50,50,"#ff0000");
-    DrawLine(900,canvas.height-200,900,canvas.height,"#000000",3);
-
-    DrawText("Output",920,canvas.height-170,"#000000","30px Arial");
-
-    DrawText(outputBinary,920,canvas.height-85,"#000000","50px Arial");
-    DrawText(outputBase64,1150,canvas.height-85,"#000000","50px Arial");
-    DrawLine(1225,canvas.height-200,1225,canvas.height,"#000000",3);
 }
 
 function HandleUserInterfaceClickEvent (){

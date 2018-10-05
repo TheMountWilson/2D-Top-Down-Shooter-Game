@@ -19,6 +19,7 @@ function LoadMapLayoutImage(index,fileName){
 
 function loadImages(){
     var imageList = [
+        // TODO: Use numbers 1,2,3... instead of Base64
         {name: "A", theFile: "0_0_0.png"},
         {name: "C", theFile: "0_0_2.png"},
 
