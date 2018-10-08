@@ -57,7 +57,7 @@ function updateMousePos (evt){
     }
     if(keyRMouse){
         if(MouseIsOnTiles){
-            editTile("*");
+            editTile(-1);
         } 
     }
 }

@@ -1,5 +1,4 @@
-var outputBinary = "100000";
-var outputBase64 = "g";
+var output= 1;
 
 function DrawUserInterface(){
     
