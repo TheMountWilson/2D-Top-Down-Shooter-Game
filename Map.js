@@ -14,7 +14,6 @@ var rectLocX = 0;
 var rectLocY = 0;
 
 
-
 function LoadMapElements(){
     enemyArray.push(new Enemy(612,200,true,2,2,100,100,3));
     enemyArray.push(new Enemy(200,300,true,2,2,100,120,4));
@@ -36,6 +35,7 @@ function LoadMapLayout (){
     var heightLevel;
     var texture;
     for (let i = 0;i<MAP.length;i++){
+
         bitset = ConvertBase64ToBinary (MAP[i]);
         if(bitset[0]=='1')MAP_Passable[i]=true;
         else if(bitset[0]=='0')MAP_Passable[i]=false;
