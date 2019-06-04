@@ -43,16 +43,12 @@ function SetKeyHoldState(pressedKey, indicator) {
         keyCombination = keyCombination.replaceAt(2,indicator);
     }
 }
-
 function SetKeyboardButton(event) {
     SetKeyHoldState(event.keyCode, "1");
 }
-
 function ResetKeyboardButton(event) {
     SetKeyHoldState(event.keyCode, "0");
 }
-
-
 
 /* MOUSE */
 
@@ -64,7 +60,6 @@ function SetMouseButton (event){
         keyRMouse = true;
     }
 }
-
 function ResetMouseButton (event){
     if(event.button == 0){
         keyLMouse = false;
@@ -73,7 +68,6 @@ function ResetMouseButton (event){
         keyRMouse = false;
     }
 }
-
 function UpdateMousePosition (event){
     var rect = canvas.getBoundingClientRect();
     var root = document.documentElement;

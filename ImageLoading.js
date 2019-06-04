@@ -12,7 +12,7 @@ function CountLoadedImages(){
 
 function LoadMapLayoutImage(index,fileName){
     MapLayoutImages[index] = document.createElement("img");
-    MapLayoutImages[index].onload = CountLoadedImages;
+    MapLayoutImages[index].onload = CountLoadedImages();
     MapLayoutImages[index].src = "Images/"+ fileName;
 }
 

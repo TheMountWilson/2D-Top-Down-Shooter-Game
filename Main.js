@@ -1,6 +1,6 @@
 function Main(){
     MovePlayer();
     InstantCamFollow();
-    DrawEverything()
+    DrawEverything();
     CheckHealth ();
 }

@@ -10,7 +10,7 @@ const MAP_HEIGHT = BRICK_H * BRICK_ROWS;
 
 var camPanX = 0.0;
 var camPanY = 0.0;
-var tileSymbol = -1;
+var tileSymbol = 0;
 
 /** START of CAMERA CODE**/
 function CalculateTileToIndex(tileCol, tileRow) {
@@ -19,7 +19,7 @@ function CalculateTileToIndex(tileCol, tileRow) {
 function isBrickAtTileCoord(brickTileCol, brickTileRow) {
     var brickIndex = CalculateTileToIndex(brickTileCol, brickTileRow);
     tileSymbol = MAP[brickIndex];
-    return (MAP[brickIndex] != -1);
+    return (MAP[brickIndex] != 0);
 }
 function isBrickAtPixelCoord(hitPixelX, hitPixelY) {
     var tileCol = hitPixelX / BRICK_W;
@@ -32,7 +32,7 @@ function isBrickAtPixelCoord(hitPixelX, hitPixelY) {
         return false;
     }
     var brickIndex = CalculateTileToIndex(tileCol, tileRow);
-    return (MAP[brickIndex] != -1);
+    return (MAP[brickIndex] != 0);
 }
 function InstantCamFollow() {
     camPanX = rectPosX - canvas.width/2;
@@ -58,8 +58,9 @@ function DrawOnlyBricksOnScreen() {
         if( isBrickAtTileCoord(eachCol, eachRow) ) {
             var brickLeftEdgeX = eachCol * BRICK_W;
             var brickTopEdgeY = eachRow * BRICK_H;
-            var useImg = MapLayoutImages[MAP[tileSymbol]];
+            var useImg = MapLayoutImages[tileSymbol];
             canvasContext.drawImage(useImg,brickLeftEdgeX,brickTopEdgeY,BRICK_W, BRICK_H);
+            console.log("tileSymbol "+tileSymbol+" MAP[tileSymbol] "+MAP[tileSymbol]);
             }
         }
     }

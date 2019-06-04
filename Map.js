@@ -8,11 +8,10 @@ let medkitArray = [];
 var MAP_Passable = [];
 var MAP_HeightLevel = [];
 var MAP_Texture = [];
-var MAP = LoadLevel_01(); // BASE64
+var MAP = LoadLevel_01();
 
 var rectLocX = 0;
 var rectLocY = 0;
-
 
 function LoadMapElements(){
     enemyArray.push(new Enemy(612,200,true,2,2,100,100,3));
