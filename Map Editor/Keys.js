@@ -27,7 +27,7 @@ function MouseDownHandler (evt){
     if (evt.button == 0) {
         keyLMouse = true;
         if(MouseIsOnTiles){
-            editTile(outputBase64);
+            editTile(selectedTexture);
         } 
         else if (MouseIsOnUserInterface){ 
             HandleUserInterfaceClickEvent();
@@ -52,12 +52,12 @@ function updateMousePos (evt){
     mouseY = evt.clientY - rect.top;
     if (keyLMouse){
         if(MouseIsOnTiles){
-            editTile(outputBase64);
+            editTile(selectedTexture);
         } 
     }
     if(keyRMouse){
         if(MouseIsOnTiles){
-            editTile(-1);
+            editTile(0);
         } 
     }
 }

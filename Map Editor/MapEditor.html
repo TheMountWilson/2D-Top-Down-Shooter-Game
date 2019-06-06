@@ -30,7 +30,7 @@ var MAP = new Array (200*200);
 
 var OutStrToClipBoard = "";
 var selectedHeightLevel = 0;
-var selectedTexture = 0;
+var selectedTexture = 1;
 var passable = true;
 
 window.onload = function() {
@@ -44,7 +44,7 @@ window.onload = function() {
     InitializeInputEventHandlers()
     
     for (let i = 0;i<MAP.length;i++){
-        MAP[i] = +1;
+        MAP[i] = 0;
     }
    
     canvas.focus();
