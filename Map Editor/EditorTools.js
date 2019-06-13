@@ -9,7 +9,7 @@ function ShowOutput(){
             counter = 0;
         }
             OutStrToScreen += MAP[i];
-            OutStrToClipBoard += "'"+MAP[i]+"',";
+            OutStrToClipBoard += ""+MAP[i]+",";
         counter++;
     }
     OutStrToScreen += "]"
