@@ -1,13 +1,7 @@
-// TODO:    
-//      Link Map loading and drawing to Camera code
-
 let bulletArray  = [];
 let enemyArray = [];
 let medkitArray = [];
 
-var MAP_Passable = [];
-var MAP_HeightLevel = [];
-var MAP_Texture = [];
 var MAP = LoadLevel_01();
 
 var rectLocX = 0;
@@ -26,21 +20,5 @@ function DrawMap(){
         for (let j = 0;j<200;j++){
             if (MAP[i*200+j]==1)DrawRect(j*10,i*10,10,10,"#4286f4");
         }
-    }
-}
-
-function LoadMapLayout (){
-    var bitset;
-    var heightLevel;
-    var texture;
-    for (let i = 0;i<MAP.length;i++){
-
-        bitset = ConvertBase64ToBinary (MAP[i]);
-        if(bitset[0]=='1')MAP_Passable[i]=true;
-        else if(bitset[0]=='0')MAP_Passable[i]=false;
-        heightLevel = bitset[1] + bitset[2] + bitset[3];
-        texture = bitset[4] + bitset[5];
-        MAP_HeightLevel[i] = ConvertToIntMapHeightLevel(heightLevel);
-        MAP_Texture[i] = ConvertToIntMapTexture(texture);
     }
 }
