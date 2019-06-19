@@ -1,6 +1,3 @@
-//  TODO: 
-//      Refactor Camera code
-
 const BRICK_W = 32;
 const BRICK_H = 32;
 const BRICK_COLS = 200;
@@ -16,22 +13,9 @@ var tileSymbol = 0;
 function CalculateTileToIndex(tileCol, tileRow) {
     return (tileCol + BRICK_COLS*tileRow);
 }
-function isBrickAtTileCoord(brickTileCol, brickTileRow) {
+function CheckIfBrickIsAtTileCoord(brickTileCol, brickTileRow) {
     var brickIndex = CalculateTileToIndex(brickTileCol, brickTileRow);
     tileSymbol = MAP[brickIndex];
-    return (MAP[brickIndex] != 0);
-}
-function isBrickAtPixelCoord(hitPixelX, hitPixelY) {
-    var tileCol = hitPixelX / BRICK_W;
-    var tileRow = hitPixelY / BRICK_H;
-
-    tileCol = Math.floor( tileCol );
-    tileRow = Math.floor( tileRow );
-
-    if(tileCol < 0 || tileCol >= BRICK_COLS || tileRow < 0 || tileRow >= BRICK_ROWS) {
-        return false;
-    }
-    var brickIndex = CalculateTileToIndex(tileCol, tileRow);
     return (MAP[brickIndex] != 0);
 }
 function InstantCamFollow() {
@@ -48,14 +32,14 @@ function DrawOnlyBricksOnScreen() {
     var colsThatFitOnScreen = Math.floor(canvas.width / BRICK_W);
     var rowsThatFitOnScreen = Math.floor(canvas.height / BRICK_H);
 
-    var cameraRightMostCol = cameraLeftMostCol + colsThatFitOnScreen + 11;
+    var cameraRightMostCol = cameraLeftMostCol + colsThatFitOnScreen + 11; 
     if (cameraRightMostCol > BRICK_COLS) cameraRightMostCol = BRICK_COLS;
-    var cameraBottomMostRow = cameraTopMostRow + rowsThatFitOnScreen + 10;
+    var cameraBottomMostRow = cameraTopMostRow + rowsThatFitOnScreen + 10; 
     if (cameraBottomMostRow> BRICK_ROWS) cameraBottomMostRow = BRICK_ROWS;
 
     for(var eachCol=cameraLeftMostCol; eachCol<cameraRightMostCol; eachCol++) {
         for(var eachRow=cameraTopMostRow; eachRow<cameraBottomMostRow; eachRow++) {
-        if( isBrickAtTileCoord(eachCol, eachRow) ) {
+        if( CheckIfBrickIsAtTileCoord(eachCol, eachRow) ) {
             var brickLeftEdgeX = eachCol * BRICK_W;
             var brickTopEdgeY = eachRow * BRICK_H;
             var useImg = MapLayoutImages[tileSymbol];
@@ -65,6 +49,7 @@ function DrawOnlyBricksOnScreen() {
         }
     }
 }
+
 /** END of CAMERA CODE**/
 
 function DrawEverything() {
@@ -115,7 +100,7 @@ function DrawDebugText(){
 }
 
 
-/* BASIC ELEMENTS */
+/* BASIC DRAWING ELEMENTS */
 function DrawRect(topLeftX,topLeftY, boxWidth, boxHeight, fillColor){
     canvasContext.fillStyle = fillColor;
     canvasContext.fillRect (topLeftX,topLeftY, boxWidth,boxHeight);
@@ -140,7 +125,6 @@ function DrawLine (startX,startY,endX,endY,strokeColor,strokeWidth){
     canvasContext.lineTo(endX,endY);
     canvasContext.stroke();
 }
-
 function DrawEmptyRect (topLeftX,topLeftY, boxWidth, boxHeight, strokeColor, strokeWidth){
     canvasContext.strokeStyle = strokeColor;
     canvasContext.lineWidth = strokeWidth;
