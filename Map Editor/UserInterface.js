@@ -1,5 +1,3 @@
-var output= 1;
-
 function DrawUserInterface(){
     
     DrawEmptyRect(0,0,canvas.width,canvas.height-200,"#000000",3);
@@ -63,95 +61,47 @@ function DrawUserInterface(){
 function HandleUserInterfaceClickEvent (){
     if(((mouseX>10)&&(mouseX<10+50))&&((mouseY>canvas.height-125)&&(mouseY<canvas.height-125+50))){
         selectedHeightLevel = 0;
-        outputBinary=outputBinary.replaceAt(1,'0');
-        outputBinary=outputBinary.replaceAt(2,'0');
-        outputBinary=outputBinary.replaceAt(3,'0');
-        outputBase64 = ConvertBinaryToBase64(outputBinary);
     }
     if(((mouseX>70)&&(mouseX<70+50))&&((mouseY>canvas.height-125)&&(mouseY<canvas.height-125+50))){
         selectedHeightLevel = 1;
-        outputBinary=outputBinary.replaceAt(1,'0');
-        outputBinary=outputBinary.replaceAt(2,'0');
-        outputBinary=outputBinary.replaceAt(3,'1');
-        outputBase64 = ConvertBinaryToBase64(outputBinary);
     }
     if(((mouseX>130)&&(mouseX<130+50))&&((mouseY>canvas.height-125)&&(mouseY<canvas.height-125+50))){
         selectedHeightLevel = 2;
-        outputBinary=outputBinary.replaceAt(1,'0');
-        outputBinary=outputBinary.replaceAt(2,'1');
-        outputBinary=outputBinary.replaceAt(3,'0');
-        outputBase64 = ConvertBinaryToBase64(outputBinary);
     }
     if(((mouseX>190)&&(mouseX<190+50))&&((mouseY>canvas.height-125)&&(mouseY<canvas.height-125+50))){
         selectedHeightLevel = 3;
-        outputBinary=outputBinary.replaceAt(1,'0');
-        outputBinary=outputBinary.replaceAt(2,'1');
-        outputBinary=outputBinary.replaceAt(3,'1');
-        outputBase64 = ConvertBinaryToBase64(outputBinary);
     }
     if(((mouseX>250)&&(mouseX<250+50))&&((mouseY>canvas.height-125)&&(mouseY<canvas.height-125+50))){
         selectedHeightLevel = 4;
-        outputBinary=outputBinary.replaceAt(1,'1');
-        outputBinary=outputBinary.replaceAt(2,'0');
-        outputBinary=outputBinary.replaceAt(3,'0');
-        outputBase64 = ConvertBinaryToBase64(outputBinary);
     }
     if(((mouseX>310)&&(mouseX<310+50))&&((mouseY>canvas.height-125)&&(mouseY<canvas.height-125+50))){
         selectedHeightLevel = 5;
-        outputBinary=outputBinary.replaceAt(1,'1');
-        outputBinary=outputBinary.replaceAt(2,'0');
-        outputBinary=outputBinary.replaceAt(3,'1');
-        outputBase64 = ConvertBinaryToBase64(outputBinary);
     }
     if(((mouseX>370)&&(mouseX<370+50))&&((mouseY>canvas.height-125)&&(mouseY<canvas.height-125+50))){
         selectedHeightLevel = 6;
-        outputBinary=outputBinary.replaceAt(1,'1');
-        outputBinary=outputBinary.replaceAt(2,'1');
-        outputBinary=outputBinary.replaceAt(3,'0');
-        outputBase64 = ConvertBinaryToBase64(outputBinary);
     }
     if(((mouseX>430)&&(mouseX<430+50))&&((mouseY>canvas.height-125)&&(mouseY<canvas.height-125+50))){
         selectedHeightLevel = 7;
-        outputBinary=outputBinary.replaceAt(1,'1');
-        outputBinary=outputBinary.replaceAt(2,'1');
-        outputBinary=outputBinary.replaceAt(3,'1');
-        outputBase64 = ConvertBinaryToBase64(outputBinary);
     }
     
     if(((mouseX>550)&&(mouseX<550+50))&&((mouseY>canvas.height-125)&&(mouseY<canvas.height-125+50))){
         selectedTexture = 0;
-        outputBinary=outputBinary.replaceAt(4,'0');
-        outputBinary=outputBinary.replaceAt(5,'0');
-        outputBase64 = ConvertBinaryToBase64(outputBinary);
     }
     if(((mouseX>610)&&(mouseX<610+50))&&((mouseY>canvas.height-125)&&(mouseY<canvas.height-125+50))){
         selectedTexture = 1;
-        outputBinary=outputBinary.replaceAt(4,'0');
-        outputBinary=outputBinary.replaceAt(5,'1');
-        outputBase64 = ConvertBinaryToBase64(outputBinary);
     }
     if(((mouseX>670)&&(mouseX<670+50))&&((mouseY>canvas.height-125)&&(mouseY<canvas.height-125+50))){
         selectedTexture = 2;
-        outputBinary=outputBinary.replaceAt(4,'1');
-        outputBinary=outputBinary.replaceAt(5,'0');
-        outputBase64 = ConvertBinaryToBase64(outputBinary);
     }
     if(((mouseX>730)&&(mouseX<730+50))&&((mouseY>canvas.height-125)&&(mouseY<canvas.height-125+50))){
         selectedTexture = 3;
-        outputBinary=outputBinary.replaceAt(4,'1');
-        outputBinary=outputBinary.replaceAt(5,'1');
-        outputBase64 = ConvertBinaryToBase64(outputBinary);
     }
 
     if(((mouseX>825)&&(mouseX<825+50))&&((mouseY>canvas.height-125)&&(mouseY<canvas.height-125+50))){
         if(passable){
-            outputBinary=outputBinary.replaceAt(0,'0');
-            outputBase64 = ConvertBinaryToBase64(outputBinary);
             passable = false;
         } 
         else if(passable == false){
-            outputBinary=outputBinary.replaceAt(0,'1');
-            outputBase64 = ConvertBinaryToBase64(outputBinary);
             passable = true;
         } 
     }
