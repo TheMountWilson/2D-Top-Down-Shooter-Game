@@ -33,7 +33,9 @@ function loadImages(){
         {number: 9, theFile: "1_3_0.png"},
         {number: 10, theFile: "1_3_1.png"},
         {number: 11, theFile: "1_3_2.png"},
-        {number: 12, theFile: "1_3_3.png"}
+        {number: 12, theFile: "1_3_3.png"},
+        {number: 13, theFile: "1_1_4.png"}
+        
     ];
 
     imagesToLoad = imageList.length;
