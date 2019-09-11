@@ -1,2 +1,0 @@
-1. Reduce the map size
-2. Add walls to the map
