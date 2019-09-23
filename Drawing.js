@@ -1,7 +1,7 @@
 const BRICK_W = 32;
 const BRICK_H = 32;
-const BRICK_COLS = 200;
-const BRICK_ROWS = 200;
+const BRICK_COLS = 50;
+const BRICK_ROWS = 50;
 const MAP_WIDTH = BRICK_W * BRICK_COLS;
 const MAP_HEIGHT = BRICK_H * BRICK_ROWS;
 
